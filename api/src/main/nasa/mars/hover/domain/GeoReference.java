@@ -1,11 +1,11 @@
-package nasa.mars.hover.controllers;
+package nasa.mars.hover.domain;
 
 /**
  * GeoReference Enumerator
  *
  * Used to assign which position stands the hover
- * @Version 1.0
- * @Author @sant0ro
+ * @version 1.0
+ * @author @sant0ro
  */
 public enum GeoReference {
 

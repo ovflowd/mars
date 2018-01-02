@@ -25,7 +25,8 @@ springBoot {
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    testCompile group: 'junit', name: 'junit', version: '5.0.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.2'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.2'
 }
 
 buildscript {

@@ -4,12 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @Package nasa.mars.hover
- *
  * A simple algorithm to trace routes to a NASA's Hover.
  *
- * @Version 1.0
- * @Author @sant0ro
+ * @version 1.0
+ * @author @sant0ro
  */
 @SpringBootApplication
 public class Boot {
