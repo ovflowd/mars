@@ -1,5 +1,7 @@
 package nasa.mars.hover.domain;
 
+import nasa.mars.hover.Boot;
+
 /**
  * Hover Domain Entity
  *
@@ -24,6 +26,11 @@ public class Hover {
      * The current Coordinate in the Map where the Hover belongs.
      */
     private Coordinate position = new Coordinate(0, 0, GeoReference.NORTH);
+
+    /**
+     * Since we don't want to do complex logic, why not just tell which map the Hover it's placed?
+     */
+    private Map currentMap = null;
 
     /**
      * Create a new Hover instance, specifying the ID, its name and current Position.
@@ -65,5 +72,37 @@ public class Hover {
      */
     public void setPosition(Coordinate position) {
         this.position = position;
+    }
+
+    /**
+     * Get the Current Hover Map
+     *
+     * @return the Map instance or null if isn't linked in any map
+     */
+    public Map getCurrentMap() {
+        return currentMap;
+    }
+
+    /**
+     * Set the Current Map that te Hover belongs
+     *
+     * @param currentMap the Map name
+     */
+    public void setCurrentMap(String currentMap) throws Exception {
+        Map temporary = Boot.getGame().getMap(currentMap);
+
+        if(temporary == null)
+            throw new Exception("The Map doesn't exists in this Game");
+
+        this.currentMap = temporary;
+    }
+
+    /**
+     * Set the Current Map that te Hover belongs
+     *
+     * @param currentMap the Map instance
+     */
+    public void setCurrentMap(Map currentMap) {
+        this.currentMap = currentMap;
     }
 }

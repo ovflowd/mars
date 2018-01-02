@@ -1,5 +1,7 @@
 package nasa.mars.hover.domain;
 
+import java.awt.*;
+
 /**
  * Hover Coordinate Utility
  *
@@ -10,14 +12,9 @@ package nasa.mars.hover.domain;
 public class Coordinate {
 
     /**
-     * The X coordinate in our Map
+     * The X,Y Coordinate Point
      */
-    public final Integer x;
-
-    /**
-     * the Y coordinate in our Map
-     */
-    public final Integer y;
+    public final Point position;
 
     /**
      * The heading of the Hover in our Map
@@ -32,8 +29,18 @@ public class Coordinate {
      * @param h the Hover heading
      */
     public Coordinate(int x, int y, GeoReference h) {
-        this.x = x;
-        this.y = y;
+        this.position = new Point(x, y);
+        this.heading = h;
+    }
+
+    /**
+     * Create a new Coordinate that can be stored on our Map
+     *
+     * @param p the Point Coordinate (X,Y)
+     * @param h the Hover heading
+     */
+    public Coordinate(Point p, GeoReference h) {
+        this.position = p;
         this.heading = h;
     }
 }

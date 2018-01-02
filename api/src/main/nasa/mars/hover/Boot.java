@@ -13,11 +13,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Boot {
 
     /**
+     * Our Game Manager Instance
+     */
+    private static Game game = new Game();
+
+    /**
      * Creates the SpringBoot Application Environment
      *
      * @param args CLI input parameters, not used on this application.
      */
     public static void main(String[] args) {
         SpringApplication.run(Boot.class, args);
+    }
+
+    /**
+     * Get the Instance of the Game Manager
+     *
+     * @return Game instance
+     */
+    public static Game getGame() {
+        return game;
     }
 }
