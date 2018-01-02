@@ -74,6 +74,41 @@ public class Map {
     }
 
     /**
+     * Update the Position of the Hover
+     *
+     * @param temporary the desired Hover
+     * @param p the desired Position
+     */
+    public boolean updatePosition(Hover temporary, Point p) {
+        if(temporary == null || !this.pathFinder.checkPath(p))
+            return false;
+
+        temporary.setPosition(p);
+
+        return true;
+    }
+
+    /**
+     * Update the Position of the Hover
+     *
+     * @param name the Hover name
+     * @param p the desired Position
+     */
+    public boolean updatePosition(String name, Point p) {
+        return this.updatePosition(Boot.getGame().getHover(name), p);
+    }
+
+    /**
+     * Update the Position of the Hover
+     *
+     * @param id the Hover Identifier
+     * @param p the desired Position
+     */
+    public boolean updatePosition(int id, Point p) {
+        return this.updatePosition(Boot.getGame().getHover(id), p);
+    }
+
+    /**
      * Add an Hover to the Map and set it Initial Position
      *
      * @param temporary the desired Hover
@@ -120,7 +155,7 @@ public class Map {
         if(h == null)
             return;
 
-        h.setPosition(null);
+        h.setPosition(0, 0);
 
         h.setCurrentMap((Map) null);
     }

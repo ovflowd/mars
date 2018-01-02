@@ -7,39 +7,74 @@ package nasa.mars.hover.domain;
  * @version 1.0
  * @author @sant0ro
  */
-public enum GeoReference {
+public class GeoReference {
 
-    NORTH(0, 'N'), // North, 90 degrees
-    EAST(1, 'E'), // East, 180 degrees
-    SOUTH(2, 'S'), // South, 270 degrees
-    WEST(3, 'W'); // West, 0 or 360 degrees
+    public final static int NORTH = 90; // 90 degrees
 
-    /**
-     * The position in a 360º degree reference
-     */
-    private final int position;
+    public final static int EAST = 180; // 180 degrees
+
+    public final static int SOUTH = 270; // 270 degrees
+
+    public final static int WEST = 0; // 0 or 360 degrees
 
     /**
-     * The output code of the geo reference angle
-     */
-    private final char code;
-
-    /**
-     * Specifies the behaviour of this Enumerator
+     * Update the GeoReference from a Coordinate
      *
-     * @param position Position Identifier for the heading of the hover
-     * @param code the output letter (single character) of the hover heading
+     * @param c the related Coordinate object
+     * @param command the following command
      */
-    GeoReference(int position, char code) {
-        this.position = position;
-        this.code = code;
+    public static void updateGeoReference(Coordinate c, char command) {
+        switch(command) {
+            case 'L':
+                c.heading = (c.heading == 270 ? 0 : c.heading + 90);
+                break;
+            case 'R':
+                c.heading = (c.heading == 0 ? 270 : c.heading - 90);
+                break;
+            default:
+                break;
+        }
     }
 
-    public char getCode() {
-        return code;
+    /**
+     * Update the GeoReference Coordinates Position
+     *
+     * @param c the related Coordinate object
+     */
+    public static void updateGeoPosition(Coordinate c) {
+        switch(c.heading) {
+            case NORTH:
+                c.position.x++;
+                break;
+            case EAST:
+                c.position.y--;
+                break;
+            case SOUTH:
+                c.position.x--;
+                break;
+            case WEST:
+                c.position.y++;
+                break;
+        }
     }
 
-    public int getPosition() {
-        return position;
+    /**
+     * Get the Geo Reference Code of a specific heading
+     *
+     * @param c the related Coordinate object
+     * @return the geo heading code
+     */
+    public static char getGeoReference(Coordinate c) {
+        switch(c.heading) {
+            default:
+            case NORTH:
+                return 'N';
+            case EAST:
+                return 'E';
+            case SOUTH:
+                return 'S';
+            case WEST:
+                return 'W';
+        }
     }
 }

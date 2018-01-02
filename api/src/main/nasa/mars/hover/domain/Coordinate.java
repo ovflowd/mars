@@ -19,7 +19,7 @@ public class Coordinate {
     /**
      * The heading of the Hover in our Map
      */
-    public GeoReference heading;
+    public int heading;
 
     /**
      * Create a new Coordinate that can be stored on our Map
@@ -28,7 +28,7 @@ public class Coordinate {
      * @param y the desired Y position in our Map
      * @param h the Hover heading
      */
-    public Coordinate(int x, int y, GeoReference h) {
+    public Coordinate(int x, int y, int h) {
         this.position = new Point(x, y);
         this.heading = h;
     }
@@ -39,8 +39,27 @@ public class Coordinate {
      * @param p the Point Coordinate (X,Y)
      * @param h the Hover heading
      */
-    public Coordinate(Point p, GeoReference h) {
+    public Coordinate(Point p, int h) {
         this.position = p;
         this.heading = h;
+    }
+
+    /**
+     * Get the Coordinate Dynamic String
+     *
+     * @return dynamic coordinate string
+     */
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+
+        b.append('(');
+        b.append(this.position.x);
+        b.append(", ");
+        b.append(this.position.y);
+        b.append(", ");
+        b.append(GeoReference.getGeoReference(this));
+        b.append(')');
+
+        return b.toString();
     }
 }
