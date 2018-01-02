@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/rest/mars")
 public class Coordinate {
 
-    @RequestMapping("/rest/mars")
-    public String getCoordinate(@RequestParam(value="newPosition") String newPosition) {
+    @RequestMapping(method = RequestMethod.GET, value = "/{commands}")
+    public String getCoordinate(@PathVariable String commands) {
         return "Under development.";
     }
 }
