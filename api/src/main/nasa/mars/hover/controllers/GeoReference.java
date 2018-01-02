@@ -1,0 +1,36 @@
+package nasa.mars.hover.controllers;
+
+/**
+ * GeoReference Enumerator
+ * used to assign which position stands the hover
+ */
+public enum GeoReference {
+
+    NORTH(0, 'N'), // North, 90 degrees
+    EAST(1, 'E'), // East, 180 degrees
+    SOUTH(2, 'S'), // South, 270 degrees
+    WEST(3, 'W'); // West, 0 or 360 degrees
+
+    /**
+     * The position in a 360º degree reference
+     */
+    private final int position;
+
+    /**
+     * The output code of the geo reference angle
+     */
+    private final char code;
+
+    GeoReference(int position, char code) {
+        this.position = position;
+        this.code = code;
+    }
+
+    public char getCode() {
+        return code;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+}
