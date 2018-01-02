@@ -136,11 +136,18 @@ public class Game {
         return this.maps.stream().filter(h -> h.name.equals(name)).findFirst().orElse(null);
     }
 
+    /**
+     * Remove a Map from the Game, and removes all Hovers from the designed Map
+     *
+     * @param name The Map name
+     */
     public void removeMap(String name) {
         Map temporary = this.getMap(name);
 
         if(temporary == null)
             return;
+
+        this.getHovers(temporary).forEach(h -> temporary.removeHover(h.id));
 
         this.maps.remove(temporary);
     }

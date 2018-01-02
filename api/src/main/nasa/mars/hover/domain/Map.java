@@ -61,7 +61,7 @@ public class Map {
         this.xBounds = x;
         this.yBounds = y;
 
-        this.pathFinder = new PathFinder();
+        this.pathFinder = new PathFinder(this);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Map {
         if(temporary.getCurrentMap() != null)
             throw new Exception("Hover already linked to a specific Map.");
 
-        temporary.setPosition(new Coordinate(0, 0, GeoReference.NORTH));
+        temporary.setPosition(0, 0);
 
         temporary.setCurrentMap(this);
     }
@@ -189,7 +189,7 @@ public class Map {
         if(temporary.isEmpty())
             return null;
 
-        return temporary.stream().filter(h -> h.getPosition().position == p).findFirst().orElse(null);
+        return temporary.stream().filter(h -> h.getPosition() == p).findFirst().orElse(null);
     }
 
     /**

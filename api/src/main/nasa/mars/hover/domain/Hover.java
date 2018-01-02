@@ -2,6 +2,8 @@ package nasa.mars.hover.domain;
 
 import nasa.mars.hover.Boot;
 
+import java.awt.*;
+
 /**
  * Hover Domain Entity
  *
@@ -25,7 +27,7 @@ public class Hover {
     /**
      * The current Coordinate in the Map where the Hover belongs.
      */
-    private Coordinate position = new Coordinate(0, 0, GeoReference.NORTH);
+    private final Coordinate coordinate = new Coordinate(0, 0, GeoReference.NORTH);
 
     /**
      * Since we don't want to do complex logic, why not just tell which map the Hover it's placed?
@@ -37,19 +39,6 @@ public class Hover {
      *
      * @param id The Hover Unique Identifier
      * @param name The Hover name
-     * @param position The Hover Position
-     */
-    public Hover(int id, String name, Coordinate position) {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-    }
-
-    /**
-     * Create a new Hover instance, specifying the ID and its name.
-     *
-     * @param id The Hover Unique Identifier
-     * @param name The Hover name
      */
     public Hover(int id, String name) {
         this.id = id;
@@ -57,21 +46,43 @@ public class Hover {
     }
 
     /**
+     * Get the Current Hover's Coordinate
+     *
+     * @return the current position
+     */
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    /**
      * Get the Current Hover's Position
      *
      * @return the current position
      */
-    public Coordinate getPosition() {
-        return position;
+    public Point getPosition() {
+        return coordinate.position;
     }
 
     /**
      * Update the Hover's Position
      *
-     * @param position the new Coordinate in the Map
+     * @param p the new Coordinate Point
      */
-    public void setPosition(Coordinate position) {
-        this.position = position;
+    public void setPosition(Point p) {
+        if(p == null)
+            return;
+
+        this.coordinate.position.move(p.x, p.y);
+    }
+
+    /**
+     * Update the Hover's Position
+     *
+     * @param x the X position
+     * @param y the Y position
+     */
+    public void setPosition(int x, int y) {
+        this.coordinate.position.move(x, y);
     }
 
     /**

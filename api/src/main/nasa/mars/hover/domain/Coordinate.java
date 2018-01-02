@@ -19,7 +19,7 @@ public class Coordinate {
     /**
      * The heading of the Hover in our Map
      */
-    public final GeoReference heading;
+    public GeoReference heading;
 
     /**
      * Create a new Coordinate that can be stored on our Map
