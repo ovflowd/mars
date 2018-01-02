@@ -2,7 +2,10 @@ package nasa.mars.hover.controllers;
 
 /**
  * GeoReference Enumerator
- * used to assign which position stands the hover
+ *
+ * Used to assign which position stands the hover
+ * @Version 1.0
+ * @Author @sant0ro
  */
 public enum GeoReference {
 
@@ -21,6 +24,12 @@ public enum GeoReference {
      */
     private final char code;
 
+    /**
+     * Specifies the behaviour of this Enumerator
+     *
+     * @param position Position Identifier for the heading of the hover
+     * @param code the output letter (single character) of the hover heading
+     */
     GeoReference(int position, char code) {
         this.position = position;
         this.code = code;
