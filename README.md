@@ -61,6 +61,24 @@ You can just follow what explained on [From Binaries](#From-Binaries) or run the
 gradlew bootRun
 ```
 
+## Extras
+
+### Building a Docker Image
+
+You can deploy a Docker Image from this project by running
+
+```
+gradlew prepareDockerImage
+```
+
+### Coverage Reports
+
+Coverage Reports are automatically generated in XML and HTML format after the `build` or the `test` commands.
+
+## Contributing
+
+You can easily contribute to this project, just follow our [Contributing Guidelines](.github/CONTRIBUTING.md)
+
 ## License
 
 This software followsthe [MIT License](LICENSE), and was made for the test and development purpose for the applying of [ContaAzul](https://contaazul.com/) as Software Engineer.
