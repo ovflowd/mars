@@ -1,0 +1,16 @@
+language: java
+jdk:
+  - oraclejdk8
+os:
+  - linux
+  - osx
+before_script:
+  - cd api/
+  - chmod +x gradlew
+script:
+  - ./gradlew check
+  - ./gradlew build
+  - ./gradlew codeCoverageReport
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 7cb12456-21ad-43b5-b880-c6dec2f457cd
+  
