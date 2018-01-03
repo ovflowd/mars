@@ -75,6 +75,8 @@ You can deploy a Docker Image from this project by running
 
 ```
 gradlew prepareDockerImage
+
+docker build -t vendor/name build/docker
 ```
 
 ### Coverage Reports
