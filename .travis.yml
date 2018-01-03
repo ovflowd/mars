@@ -1,9 +1,6 @@
 language: java
 jdk:
   - oraclejdk8
-env:
-  global:
-    - CODECOV_TOKEN=7cb12456-21ad-43b5-b880-c6dec2f457cd
 os:
   - linux
 before_script:
