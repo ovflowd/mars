@@ -1,9 +1,13 @@
 language: java
 jdk:
   - oraclejdk8
+env:
+  global:
+    - CODECOV_TOKEN=:7cb12456-21ad-43b5-b880-c6dec2f457cd
 os:
   - linux
 before_script:
+  - pip install --user codecov
   - cd api/
   - chmod +x gradlew
 script:
@@ -11,5 +15,5 @@ script:
   - ./gradlew build
   - ./gradlew codeCoverageReport
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t 7cb12456-21ad-43b5-b880-c6dec2f457cd
+  - codecov
   
