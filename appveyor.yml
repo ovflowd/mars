@@ -8,7 +8,7 @@ build_script:
   - gradlew.bat assemble --info --no-daemon
 
 test_script:
-  - api\gradlew.bat check --info --no-daemon
+  - gradlew.bat check --info --no-daemon
 
 branches:
   only:
