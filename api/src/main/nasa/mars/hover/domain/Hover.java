@@ -99,11 +99,14 @@ public class Hover {
      *
      * @param currentMap the Map name
      */
-    public void setCurrentMap(String currentMap) throws Exception {
+    public void setCurrentMap(String currentMap) {
         Map temporary = Boot.getGame().getMap(currentMap);
 
-        if(temporary == null)
-            throw new Exception("The Map doesn't exists in this Game");
+        if(temporary == null) {
+            System.out.println("The Map doesn't exists in this Game");
+
+            return;
+        }
 
         this.currentMap = temporary;
     }

@@ -11,11 +11,11 @@ public class GeoReference {
 
     public final static int NORTH = 90; // 90 degrees
 
-    public final static int EAST = 180; // 180 degrees
+    public final static int WEST = 180; // 180 degrees
 
     public final static int SOUTH = 270; // 270 degrees
 
-    public final static int WEST = 0; // 0 or 360 degrees
+    public final static int EAST = 0; // 0 or 360 degrees
 
     /**
      * Update the GeoReference from a Coordinate
@@ -44,16 +44,16 @@ public class GeoReference {
     public static void updateGeoPosition(Coordinate c) {
         switch(c.heading) {
             case NORTH:
-                c.position.x++;
+                c.position.y++;
                 break;
             case EAST:
-                c.position.y--;
+                c.position.x++;
                 break;
             case SOUTH:
-                c.position.x--;
+                c.position.y--;
                 break;
             case WEST:
-                c.position.y++;
+                c.position.x--;
                 break;
         }
     }

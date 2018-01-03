@@ -52,11 +52,13 @@ public class Game {
      * Tries to add a new Hover in the Game
      *
      * @param h The desired Hover to be added
-     * @throws Exception If a hover with same Identifier already exists
      */
-    public void addHover(Hover h) throws Exception {
-        if(this.getHover(h.id) != null)
-            throw new Exception("The Game cannot have the same Hover twice.");
+    public void addHover(Hover h) {
+        if(this.getHover(h.id) != null) {
+            System.out.println("The Game cannot have the same Hover twice.");
+
+            return;
+        }
 
         this.hovers.add(h);
     }

@@ -16,21 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 public class Movement {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{commands}")
-    public ResponseEntity<String> getCoordinate(@PathVariable String commands) throws Exception {
+    public ResponseEntity<String> getCoordinate(@PathVariable String commands) {
+        // Translate the input string unto a Coordinate
         Coordinate c = Interpreter.translate(commands);
 
         if(c == null)
             return ResponseEntity.badRequest().body("400 Bad Request");
 
+        // Get our default Hover
         Hover h = Boot.getGame().getHover("Default Hover");
 
+        // Get our default Map
         Map m = Boot.getGame().getMap("Mars");
 
+        // Add hover to map
         m.addHover(h);
 
-        if(!m.updatePosition(h, c.position))
+        // Check if is valid and update Coordinate
+        if(!m.updateCoordinate(h, c))
             return ResponseEntity.badRequest().body("400 Bad Request");
 
-        return ResponseEntity.ok().body(h.getCoordinate().toString());
+        // Get Coordinate String
+        String cString = h.getCoordinate().toString();
+
+        // Remove Hover from Map in order of removing history
+        m.removeHover(h);
+
+        return ResponseEntity.ok().body(cString);
     }
 }

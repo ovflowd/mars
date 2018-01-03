@@ -77,13 +77,15 @@ public class Map {
      * Update the Position of the Hover
      *
      * @param temporary the desired Hover
-     * @param p the desired Position
+     * @param c the desired Coordinate
      */
-    public boolean updatePosition(Hover temporary, Point p) {
-        if(temporary == null || !this.pathFinder.checkPath(p))
+    public boolean updateCoordinate(Hover temporary, Coordinate c) {
+        if(temporary == null || !this.pathFinder.checkPath(c.position))
             return false;
 
-        temporary.setPosition(p);
+        temporary.setPosition(c.position);
+
+        temporary.getCoordinate().heading = c.heading;
 
         return true;
     }
@@ -92,34 +94,39 @@ public class Map {
      * Update the Position of the Hover
      *
      * @param name the Hover name
-     * @param p the desired Position
+     * @param c the desired Coordinate
      */
-    public boolean updatePosition(String name, Point p) {
-        return this.updatePosition(Boot.getGame().getHover(name), p);
+    public boolean updateCoordinate(String name, Coordinate c) {
+        return this.updateCoordinate(Boot.getGame().getHover(name), c);
     }
 
     /**
      * Update the Position of the Hover
      *
      * @param id the Hover Identifier
-     * @param p the desired Position
+     * @param c the desired Coordinate
      */
-    public boolean updatePosition(int id, Point p) {
-        return this.updatePosition(Boot.getGame().getHover(id), p);
+    public boolean updateCoordinate(int id, Coordinate c) {
+        return this.updateCoordinate(Boot.getGame().getHover(id), c);
     }
 
     /**
      * Add an Hover to the Map and set it Initial Position
      *
      * @param temporary the desired Hover
-     * @throws Exception if the Hover isn't found or already in a Map
      */
-    public void addHover(Hover temporary) throws Exception {
-        if(temporary == null)
-            throw new Exception("Hover not found, cannot add it to the Map");
+    public void addHover(Hover temporary) {
+        if(temporary == null) {
+            System.out.println("Hover not found, cannot add it to the Map");
 
-        if(temporary.getCurrentMap() != null)
-            throw new Exception("Hover already linked to a specific Map.");
+            return;
+        }
+
+        if(temporary.getCurrentMap() != null) {
+            System.out.println("Hover already linked to a specific Map.");
+
+            return;
+        }
 
         temporary.setPosition(0, 0);
 
@@ -130,9 +137,8 @@ public class Map {
      * Add an Hover to the Map and set it Initial Position
      *
      * @param name The Hover name
-     * @throws Exception if the Hover isn't found or already in a Map
      */
-    public void addHover(String name) throws Exception {
+    public void addHover(String name) {
         this.addHover(Boot.getGame().getHover(name));
     }
 
@@ -140,9 +146,8 @@ public class Map {
      * Add an Hover to the Map and set it Initial Position
      *
      * @param id The Hover Identifier
-     * @throws Exception if the Hover isn't found or already in a Map
      */
-    public void addHover(int id) throws Exception {
+    public void addHover(int id) {
         this.addHover(Boot.getGame().getHover(id));
     }
 
@@ -151,7 +156,7 @@ public class Map {
      *
      * @param h The current Hover
      */
-    private void removeHover(Hover h) {
+    public void removeHover(Hover h) {
         if(h == null)
             return;
 

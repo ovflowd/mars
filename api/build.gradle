@@ -14,13 +14,17 @@ repositories {
     mavenCentral()
 }
 
+bootRepackage {
+    mainClass = 'nasa.mars.hover.Boot'
+}
+
 jar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
 }
 
 springBoot {
-    mainClass = "nasa.mars.hover.Boot"
+    mainClass = 'nasa.mars.hover.Boot'
 }
 
 dependencies {

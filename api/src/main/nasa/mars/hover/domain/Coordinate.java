@@ -50,16 +50,6 @@ public class Coordinate {
      * @return dynamic coordinate string
      */
     public String toString() {
-        StringBuilder b = new StringBuilder();
-
-        b.append('(');
-        b.append(this.position.x);
-        b.append(", ");
-        b.append(this.position.y);
-        b.append(", ");
-        b.append(GeoReference.getGeoReference(this));
-        b.append(')');
-
-        return b.toString();
+        return "(" + this.position.x + ", " + this.position.y + ", " + GeoReference.getGeoReference(this) + ')';
     }
 }

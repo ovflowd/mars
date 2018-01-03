@@ -25,10 +25,10 @@ public class Interpreter {
     public static Coordinate translate(String hash) {
         List<Character> commands = hash.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
 
-        if (commands.stream().allMatch(Character::isLetter))
+        if (!commands.stream().allMatch(Character::isLetter))
             return null;
 
-        if (commands.stream().allMatch(c -> (c == 'L' || c == 'R' || c == 'M')))
+        if (!commands.stream().allMatch(c -> (c == 'L' || c == 'R' || c == 'M')))
             return null;
 
         Coordinate coordinate = new Coordinate(0, 0, GeoReference.NORTH);
