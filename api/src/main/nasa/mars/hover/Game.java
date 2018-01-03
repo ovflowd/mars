@@ -109,7 +109,7 @@ public class Game {
      * @return Return a List of Hovers
      */
     public List<Hover> getHovers(String name) {
-        return this.hovers.stream().filter(h -> h.getCurrentMap().name.equals(name)).collect(Collectors.toList());
+        return this.hovers.stream().filter(h -> h.getCurrentMap() != null && h.getCurrentMap().name.equals(name)).collect(Collectors.toList());
     }
 
     /**
