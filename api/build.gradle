@@ -21,11 +21,6 @@ bootRepackage {
     mainClass = 'nasa.mars.hover.Boot'
 }
 
-jar {
-    baseName = 'mars-api'
-    version =  '1.0'
-}
-
 springBoot {
     mainClass = 'nasa.mars.hover.Boot'
 }
@@ -72,45 +67,55 @@ configurations {
     integrationRuntime.extendsFrom testRuntime
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-}
-
-check.dependsOn jacocoTestReport
-
 task prepareDockerImage() {
     group = 'docker'
     description = 'Create Image for Docker'
 
     doFirst {
-        /* copy the generate war file to /build/docker/app */
         copy {
             from war.archivePath
             into 'build/docker/app/'
         }
-        /* copy artifacts from src/main/docker/app into the build/docker/app */
         copy {
             from 'src/main/docker/app/'
             into 'build/docker/app'
         }
-        /* copy Dockerfile from src/main/docker into the build/docker */
         copy {
             from('src/main/docker/') {
                 include 'Dockerfile'
             }
             into 'build/docker'
         }
-        /* copy docker-entrypoint.sh from src/main/docker into the build/docker */
         copy {
             from('src/main/docker/') {
                 include 'docker-entrypoint.sh'
             }
             into 'build/docker/app'
         }
-        /* rename war file to application.jar */
         file("build/docker/app/${war.archiveName}").renameTo("build/docker/app/application.jar")
     }
+}
+
+afterEvaluate {
+    def junitPlatformTestTask = (JavaExec) project.tasks.getByName('junitPlatformTest')
+
+    jacoco {
+        applyTo(junitPlatformTestTask)
+    }
+
+    project.task(type: JacocoReport, "jacocoJupTestReport") {
+        executionData(junitPlatformTestTask)
+        sourceSets(sourceSets.main)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+        classDirectories = files(sourceSets.main.output)
+
+        reports {
+            xml.enabled true
+            xml.destination file("${buildDir}/jacoco/report.xml")
+            html.enabled true
+            html.destination file("${buildDir}/jacoco/html")
+        }
+    }
+
+    check.dependsOn jacocoJupTestReport
 }

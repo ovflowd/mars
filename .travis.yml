@@ -14,5 +14,6 @@ script:
   - ./gradlew check
   - ./gradlew build
 after_success:
-  - codecov
+  - cd api/
+  - codecov -f
   
