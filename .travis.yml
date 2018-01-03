@@ -3,6 +3,7 @@ jdk:
   - oraclejdk8
 os:
   - linux
+  - osx
 before_script:
   - pip install --user codecov
   - cd api/
