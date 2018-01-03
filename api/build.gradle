@@ -29,8 +29,14 @@ springBoot {
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.2'
     testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.2'
+
+    testCompile group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.0.2'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 }
 
 buildscript {
@@ -45,15 +51,20 @@ buildscript {
     }
 }
 
-junitPlatform {
-    filters {
-        engines {
-            include 'junit-jupiter'
-        }
-        tags {
-            include 'fast', 'smoke'
-        }
-        includeClassNamePattern '.*Spec'
-        includeClassNamePatterns '.*Test', '.*Tests'
+sourceSets {
+    test {
+        java.srcDirs = ['src/test']
     }
+    main {
+        java.srcDirs = ['src/main']
+    }
+}
+
+junitPlatform {
+    details 'tree'
+}
+
+configurations {
+    integrationCompile.extendsFrom testCompile
+    integrationRuntime.extendsFrom testRuntime
 }

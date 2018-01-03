@@ -32,6 +32,9 @@ public class Boot {
      * @return Game instance
      */
     public static Game getGame() {
+        if(game == null)
+            game = new Game();
+
         return game;
     }
 }

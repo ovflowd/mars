@@ -36,7 +36,7 @@ public class Game {
     /**
      * Create a new Instance of the Game Engine
      */
-    Game() {
+    public Game() {
         // Instantiate our Classes
         this.hovers = new Vector<>();
         this.maps = new Vector<>();

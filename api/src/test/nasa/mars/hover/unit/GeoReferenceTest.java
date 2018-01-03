@@ -1,5 +1,8 @@
 package nasa.mars.hover.unit;
 
+import nasa.mars.hover.domain.Coordinate;
+import nasa.mars.hover.domain.GeoReference;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,13 +11,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * GeoReferenceTest
  *
  * Unit Test for testing expected outputs from GeoReference Enumerator
- * @version 1.0
+ *
  * @author @sant0ro
+ * @version 1.0
  */
 class GeoReferenceTest {
 
     @Test
-    void myFirstTest() {
-        assertEquals(2, 1 + 1);
+    @DisplayName("Check if all characters return in their respective Coordinate Headings")
+    void testCoordinate() {
+        Coordinate c;
+
+        c = new Coordinate(0, 0, GeoReference.NORTH);
+
+        assertEquals('N', GeoReference.getGeoReference(c));
+
+        c = new Coordinate(0, 0, GeoReference.EAST);
+
+        assertEquals('E', GeoReference.getGeoReference(c));
+
+        c = new Coordinate(0, 0, GeoReference.WEST);
+
+        assertEquals('W', GeoReference.getGeoReference(c));
+
+        c = new Coordinate(0, 0, GeoReference.SOUTH);
+
+        assertEquals('S', GeoReference.getGeoReference(c));
+    }
+
+    @Test
+    @DisplayName("Check the value of each Heading")
+    void testDegrees() {
+        assertEquals(90, GeoReference.NORTH);
+
+        assertEquals(270, GeoReference.SOUTH);
+
+        assertEquals(0, GeoReference.EAST);
+
+        assertEquals(180, GeoReference.WEST);
     }
 }
