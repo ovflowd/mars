@@ -1,5 +1,5 @@
 group 'sant0ro'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -23,7 +23,7 @@ bootRepackage {
 
 jar {
     baseName = 'mars-api'
-    version =  '0.1.0'
+    version =  '1.0'
 }
 
 springBoot {
