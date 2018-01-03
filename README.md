@@ -3,7 +3,7 @@
 ### M.A.R.S - A simple Hover Path Finder implementation Algorithm.
 
 ----------------------
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]() [![Github All Releases](https://img.shields.io/github/downloads/sant0ro/mars/total.svg)]() [![Code Climate](https://img.shields.io/codeclimate/issues/github/sant0ro/mars.svg)]() [![Build Status](https://travis-ci.org/sant0ro/mars.svg?branch=master)](https://travis-ci.org/sant0ro/mars) [![codecov](https://codecov.io/gh/sant0ro/mars/branch/master/graph/badge.svg)](https://codecov.io/gh/sant0ro/mars) [![Docker Pulls](https://img.shields.io/docker/pulls/sant0ro/mars.svg)]()
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]() [![Github All Releases](https://img.shields.io/github/downloads/sant0ro/mars/total.svg)]() [![GitHub release](https://img.shields.io/github/release/sant0ro/mars.svg)]() [![Code Climate](https://img.shields.io/codeclimate/issues/github/sant0ro/mars.svg)]() [![Build Status](https://travis-ci.org/sant0ro/mars.svg?branch=master)](https://travis-ci.org/sant0ro/mars) [![codecov](https://codecov.io/gh/sant0ro/mars/branch/master/graph/badge.svg)](https://codecov.io/gh/sant0ro/mars) [![Docker Pulls](https://img.shields.io/docker/pulls/sant0ro/mars.svg)]()
 
 ## About
 
