@@ -1,13 +1,13 @@
-group 'nasa'
+group 'sant0ro'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'jacoco'
-apply from: 'docker.gradle'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,7 +22,7 @@ bootRepackage {
 }
 
 jar {
-    baseName = 'gs-spring-boot'
+    baseName = 'mars-api'
     version =  '0.1.0'
 }
 
@@ -72,21 +72,45 @@ configurations {
     integrationRuntime.extendsFrom testRuntime
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
+jacocoTestReport {
     reports {
-        xml.enabled true
-        xml.destination "${buildDir}/reports/jacoco/report.xml"
-        html.enabled false
-        csv.enabled false
+        xml.enabled = true
+        html.enabled = true
     }
 }
 
-codeCoverageReport.dependsOn {
-    subprojects*.test
+check.dependsOn jacocoTestReport
+
+task prepareDockerImage() {
+    group = 'docker'
+    description = 'Create Image for Docker'
+
+    doFirst {
+        /* copy the generate war file to /build/docker/app */
+        copy {
+            from war.archivePath
+            into 'build/docker/app/'
+        }
+        /* copy artifacts from src/main/docker/app into the build/docker/app */
+        copy {
+            from 'src/main/docker/app/'
+            into 'build/docker/app'
+        }
+        /* copy Dockerfile from src/main/docker into the build/docker */
+        copy {
+            from('src/main/docker/') {
+                include 'Dockerfile'
+            }
+            into 'build/docker'
+        }
+        /* copy docker-entrypoint.sh from src/main/docker into the build/docker */
+        copy {
+            from('src/main/docker/') {
+                include 'docker-entrypoint.sh'
+            }
+            into 'build/docker/app'
+        }
+        /* rename war file to application.jar */
+        file("build/docker/app/${war.archiveName}").renameTo("build/docker/app/application.jar")
+    }
 }
