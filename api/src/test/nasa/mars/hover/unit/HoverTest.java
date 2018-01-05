@@ -55,5 +55,8 @@ class HoverTest {
 
         // Check if creating manually Hovers, Coordinate goes well
         assertNotNull(new Hover("Loyal Hover", new Date(), Mission.FAILURE).coordinate());
+
+        // Clear everything.
+        engine.getHovers().clear();
     }
 }

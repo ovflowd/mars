@@ -38,14 +38,22 @@ class InterpreterTest {
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
+        // Should throw an exception, invalid command code inside the command
         assertThrows(RuntimeException.class, ()-> interpreter.translate("MARLL"));
 
+        // Testing command -> move, move
         assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 
+        // Testing command -> move, move, right, move, move
         assertEquals(coordinate.update(2, 2, Cardinal.EAST), interpreter.translate("MMRMM"));
 
+        // Testing command -> move, move, right, left, move
         assertEquals(coordinate.update(0, 3, Cardinal.NORTH), interpreter.translate("MMRLM"));
 
+        // Testing command -> left, left, left, left, right, right, right, right
         assertEquals(coordinate.update(0, 0, Cardinal.NORTH), interpreter.translate("LLLLRRRR"));
+
+        // Testing command -> right, move, left, left, move
+        assertEquals(coordinate.update(0, 0, Cardinal.NORTH), interpreter.translate("RMLLM"));
     }
 }

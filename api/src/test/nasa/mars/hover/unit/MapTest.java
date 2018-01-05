@@ -105,5 +105,11 @@ class MapTest {
 
         // Test if removing goes well
         assertEquals(true, engine.getMaps().remove("Moon"));
+
+        // Clear everything.
+        engine.getMaps().clear();
+
+        // Now we should have nothing
+        assertEquals(0, engine.getMaps().all().size());
     }
 }
