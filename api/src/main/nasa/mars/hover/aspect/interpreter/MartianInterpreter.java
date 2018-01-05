@@ -3,6 +3,7 @@ package nasa.mars.hover.aspect.interpreter;
 import nasa.mars.hover.aspect.Interpreter;
 import nasa.mars.hover.model.Coordinate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Service
+@Scope("prototype")
 public class MartianInterpreter implements Serializable, Interpreter {
 
     /**
@@ -50,6 +52,8 @@ public class MartianInterpreter implements Serializable, Interpreter {
 
         if (!commands.stream().allMatch(c -> (c == 'L' || c == 'R' || c == 'M')))
             throw new RuntimeException("Only L, R and M are valid commands");
+
+        coordinate.reset();
 
         commands.forEach(command -> {
             switch (command) {

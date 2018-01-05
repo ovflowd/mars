@@ -1,8 +1,7 @@
 package nasa.mars.hover.service.iterator;
 
-import nasa.mars.hover.model.enumerator.Cardinal;
 import nasa.mars.hover.model.Coordinate;
-import org.springframework.beans.factory.annotation.Autowired;
+import nasa.mars.hover.model.enumerator.Cardinal;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -67,9 +66,11 @@ public class GeoReference implements Serializable {
      * Set the Coordinate for the GeoReference Service
      *
      * @param coordinate desired coordinate
+     * @return this instance (Fluent Setter)
      */
-    @Autowired
-    public void setCoordinate(Coordinate coordinate) {
+    public GeoReference setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
+
+        return this;
     }
 }

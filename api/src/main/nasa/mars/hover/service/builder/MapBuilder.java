@@ -2,6 +2,7 @@ package nasa.mars.hover.service.builder;
 
 import nasa.mars.hover.model.Map;
 import nasa.mars.hover.service.IBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Map Builder
@@ -13,6 +14,12 @@ import nasa.mars.hover.service.IBuilder;
  * @since 1.1
  */
 public abstract class MapBuilder implements IBuilder<Map> {
+
+    /**
+     * The Hover Instance linked to the Builder
+     */
+    @Autowired
+    protected Map map;
 
     /**
      * Build the Height of te Map
@@ -35,5 +42,11 @@ public abstract class MapBuilder implements IBuilder<Map> {
      * @return Map Instance
      */
     @Override
-    public abstract Map build();
+    public Map build(){
+        buildName();
+        buildHeight();
+        buildWidth();
+
+        return map;
+    }
 }

@@ -2,7 +2,7 @@ package nasa.mars.hover.service.builder;
 
 import nasa.mars.hover.model.Hover;
 import nasa.mars.hover.model.enumerator.Mission;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,13 +17,17 @@ import java.util.Date;
  * @since 1.1
  */
 @Service
+@Scope("prototype")
 public class CuriosityHoverBuilder extends HoverBuilder {
 
     /**
-     * The Hover Instance linked to the Builder
+     * Creates a new Curiosity Hover
+     *
+     * @param hover autowired hover
      */
-    @Autowired
-    private Hover hover;
+    public CuriosityHoverBuilder(Hover hover) {
+        this.hover = hover;
+    }
 
     /**
      * Build the Name of the Hover
@@ -47,19 +51,5 @@ public class CuriosityHoverBuilder extends HoverBuilder {
     @Override
     void buildMissionStatus() {
         hover.status = Mission.OPERATING;
-    }
-
-    /**
-     * Get the result Hover
-     *
-     * @return Hover Instance
-     */
-    @Override
-    public Hover build(){
-        buildName();
-        buildLaunchDate();
-        buildMissionStatus();
-
-        return hover;
     }
 }

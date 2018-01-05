@@ -3,6 +3,7 @@ package nasa.mars.hover.model;
 import nasa.mars.hover.Engine;
 import nasa.mars.hover.model.enumerator.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
  * @author @sant0ro
  */
 @Component
+@Scope("prototype")
 public class Map {
 
     /**

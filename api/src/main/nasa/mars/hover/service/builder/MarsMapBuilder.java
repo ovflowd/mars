@@ -1,7 +1,7 @@
 package nasa.mars.hover.service.builder;
 
 import nasa.mars.hover.model.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +14,17 @@ import org.springframework.stereotype.Service;
  * @since 1.1
  */
 @Service
+@Scope("prototype")
 public class MarsMapBuilder extends MapBuilder {
 
     /**
-     * The Map Instance linked to the Builder
+     * Creates a new Mars Map
+     *
+     * @param map autowired map
      */
-    @Autowired
-    private Map map;
+    public MarsMapBuilder(Map map) {
+        this.map = map;
+    }
 
     /**
      * Build the Height of te Map
@@ -44,19 +48,5 @@ public class MarsMapBuilder extends MapBuilder {
     @Override
     public void buildName() {
         this.map.name = "Mars";
-    }
-
-    /**
-     * Get the result Map
-     *
-     * @return Map Instance
-     */
-    @Override
-    public Map build(){
-        buildName();
-        buildHeight();
-        buildWidth();
-
-        return map;
     }
 }

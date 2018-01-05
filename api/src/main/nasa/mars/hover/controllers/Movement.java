@@ -25,11 +25,29 @@ public class Movement {
     private Engine engine;
 
     /**
+     * Our desired Hover Builder
+     */
+    @Autowired
+    private CuriosityHoverBuilder hoverBuilder;
+
+    /**
+     * Our desired Map Builder
+     */
+    @Autowired
+    private MarsMapBuilder marsBuilder;
+
+    /**
      * Instance of our Interpreter
      */
     @Autowired
     private MartianInterpreter interpreter;
 
+    /**
+     * Request a Movement of a Hover inside a Map
+     *
+     * @param commands The Input Command
+     * @return The new position if success, an error if not.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/{commands}")
     public ResponseEntity<String> getCoordinate(@PathVariable String commands) {
         try {
@@ -37,10 +55,10 @@ public class Movement {
             Coordinate c = interpreter.translate(commands);
 
             // Get our default Hover
-            Hover curiosity = engine.getHovers().build(new CuriosityHoverBuilder());
+            Hover curiosity = engine.getHovers().build(hoverBuilder);
 
             // Get our default Map
-            Map map = engine.getMaps().build(new MarsMapBuilder());
+            Map map = engine.getMaps().build(marsBuilder);
 
             // Add hover to map
             map.link(curiosity);

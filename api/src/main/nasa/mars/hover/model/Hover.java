@@ -2,6 +2,7 @@ package nasa.mars.hover.model;
 
 import nasa.mars.hover.model.enumerator.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Date;
  * @author @sant0ro
  */
 @Component
+@Scope("prototype")
 public class Hover implements Serializable {
 
     /**

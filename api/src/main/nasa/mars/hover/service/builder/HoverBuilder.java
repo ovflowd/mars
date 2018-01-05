@@ -2,6 +2,7 @@ package nasa.mars.hover.service.builder;
 
 import nasa.mars.hover.model.Hover;
 import nasa.mars.hover.service.IBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Hover Builder
@@ -13,6 +14,12 @@ import nasa.mars.hover.service.IBuilder;
  * @since 1.1
  */
 public abstract class HoverBuilder implements IBuilder<Hover> {
+
+    /**
+     * The Hover Instance linked to the Builder
+     */
+    @Autowired
+    protected Hover hover;
 
     /**
      * Build the Name of the Hover
@@ -35,5 +42,11 @@ public abstract class HoverBuilder implements IBuilder<Hover> {
      * @return Hover Instance
      */
     @Override
-    public abstract Hover build();
+    public Hover build(){
+        buildName();
+        buildLaunchDate();
+        buildMissionStatus();
+
+        return hover;
+    }
 }

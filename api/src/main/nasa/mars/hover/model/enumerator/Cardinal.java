@@ -1,8 +1,5 @@
 package nasa.mars.hover.model.enumerator;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -16,7 +13,6 @@ import java.util.NoSuchElementException;
  * @version 1.1
  * @since 1.1
  */
-@Component
 public enum Cardinal {
 
     /**
@@ -69,15 +65,6 @@ public enum Cardinal {
      Cardinal(int angle, char code) {
         this.angle = angle;
         this.code = code;
-    }
-
-    /**
-     * Creates an Instance of the Cardinal Enumerator
-     */
-    @Autowired
-    Cardinal() {
-         this.angle = 90;
-         this.code = 'N';
     }
 
     static {
