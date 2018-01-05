@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Inerpreter Test
@@ -36,7 +37,7 @@ class InterpreterTest {
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
-        assertEquals(null, interpreter.translate("MARLL"));
+        assertThrows(RuntimeException.class,  ()-> interpreter.translate("MARLL"));
 
         assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 

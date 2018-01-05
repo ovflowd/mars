@@ -40,7 +40,7 @@ class MapTest {
 
         assertEquals(false, map.valid(33, 33));
 
-        assertEquals(true, map.valid(4, 1));
+        assertEquals(true, map.valid(1, 1));
 
         assertEquals(false, map.valid(-20, 0));
     }
