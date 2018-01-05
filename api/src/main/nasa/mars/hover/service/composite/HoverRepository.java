@@ -113,7 +113,7 @@ public class HoverRepository implements IRepository<Hover> {
      * @return A List of Hovers by Map
      */
     public List<Hover> getByMap(String name) {
-        return all().stream().filter(h -> h.map.name.equals(name)).collect(Collectors.toList());
+        return all().stream().filter(h -> h.map != null && h.map.name.equals(name)).collect(Collectors.toList());
     }
 
     /**

@@ -88,7 +88,7 @@ class MapTest {
         earthMap.unlink("Land Hover");
 
         // Now it should move.
-        assertEquals(false, earthMap.move(spaceXHover, new Coordinate(1, 1, Cardinal.EAST)));
+        assertEquals(true, earthMap.move(spaceXHover, new Coordinate(1, 1, Cardinal.EAST)));
     }
 
     @Test
