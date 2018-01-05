@@ -14,6 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Movement Controller
+ *
+ * Does the Movement operations of
+ *  the Mars hovers
+ *
+ * @author @sant0ro
+ * @version 1.1
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/rest/mars")
 public class MovementController {

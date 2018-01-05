@@ -12,8 +12,10 @@ import java.util.Date;
  * Hover Domain Entity
  *
  * This "memory based" entity would contain our Hover entities
- * @version 1.0
+ *
  * @author @sant0ro
+ * @version 1.1
+ * @since 1.0
  */
 @Component
 @Scope("prototype")
