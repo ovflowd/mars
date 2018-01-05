@@ -58,4 +58,9 @@ public interface IRepository<T> {
      * @return If the element exists or not
      */
     boolean exists(String o);
+
+    /**
+     * Remove all Items from the Repository
+     */
+    void clear();
 }

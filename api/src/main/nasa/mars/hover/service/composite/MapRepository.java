@@ -104,4 +104,12 @@ public class MapRepository implements IRepository<Map> {
     public boolean exists(String name) {
         return items.containsKey(name);
     }
+
+    /**
+     * Remove all Maps from the Repository
+     */
+    @Override
+    public void clear() {
+        this.items.clear();
+    }
 }

@@ -27,10 +27,13 @@ class MapTest {
     @Autowired
     private Engine engine;
 
+    @Autowired
+    private MoonMapBuilder mapBuilder;
+
     @Test
     @DisplayName("Tries to create Maps and Iterate with it")
     void testPathFinder() {
-        Map map = engine.getMaps().build(new MoonMapBuilder());
+        Map map = engine.getMaps().build(mapBuilder);
 
         assertEquals(false, map.valid(33, 33));
 

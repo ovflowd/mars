@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/rest/mars")
-public class Movement {
+public class MovementController {
 
     /**
      * Instance of the Application Engine
@@ -72,6 +72,8 @@ public class Movement {
 
             // Remove both Map and Hovers, in order to not store history
             engine.getMaps().remove("Mars");
+
+            engine.getHovers().remove("Curiosity");
 
             return ResponseEntity.ok().body(cString);
         } catch(RuntimeException e) {

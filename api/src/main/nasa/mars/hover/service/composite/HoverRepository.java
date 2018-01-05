@@ -114,4 +114,12 @@ public class HoverRepository implements IRepository<Hover> {
     public List<Hover> getByMap(String name) {
         return all().stream().filter(h -> h.map.name.equals(name)).collect(Collectors.toList());
     }
+
+    /**
+     * Remove all Hovers from the Repository
+     */
+    @Override
+    public void clear() {
+        this.items.clear();
+    }
 }
