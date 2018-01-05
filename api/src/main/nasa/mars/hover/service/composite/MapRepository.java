@@ -53,12 +53,13 @@ public class MapRepository implements IRepository<Map> {
      * Remove a Map from the Repository
      *
      * @param name Map to be removed
+     * @return if removed with success
      */
     @Override
-    public void remove(String name) {
+    public boolean remove(String name) {
         items.get(name).unlink();
 
-        items.remove(name);
+        return items.remove(name) != null;
     }
 
     /**

@@ -54,10 +54,11 @@ public class HoverRepository implements IRepository<Hover> {
      * Remove a Hover from the Repository
      *
      * @param name Hover to be removed
+     * @return if removed with success
      */
     @Override
-    public void remove(String name) {
-        items.remove(name);
+    public boolean remove(String name) {
+        return items.remove(name) != null;
     }
 
     /**

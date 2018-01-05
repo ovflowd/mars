@@ -54,6 +54,8 @@ public class Hover implements Serializable {
      */
     public Hover(String name) {
         this.name = name;
+
+        this.coordinate = new Coordinate();
     }
 
     /**
@@ -67,6 +69,8 @@ public class Hover implements Serializable {
         this.name = name;
         this.launch = new Date();
         this.status = Mission.STARTED;
+
+        this.coordinate = new Coordinate();
     }
 
     /**
@@ -77,6 +81,7 @@ public class Hover implements Serializable {
         this.name = "Default Hover";
         this.launch = new Date();
         this.status = Mission.STARTED;
+
         this.coordinate = c;
     }
 

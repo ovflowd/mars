@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Inerpreter Test
+ * Interpreter Test
  *
  * Check if the Interpreter goes well
  *
@@ -43,5 +43,9 @@ class InterpreterTest {
         assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 
         assertEquals(coordinate.update(2, 2, Cardinal.EAST), interpreter.translate("MMRMM"));
+
+        assertEquals(coordinate.update(0, 3, Cardinal.NORTH), interpreter.translate("MMRLM"));
+
+        assertEquals(coordinate.update(0, 0, Cardinal.NORTH), interpreter.translate("LLLLRRRR"));
     }
 }

@@ -99,33 +99,56 @@ public class Map {
      *  from the last map
      *
      * @param hover the desired Hover
+     * @return if linked with success
      */
-    public void link(Hover hover) {
+    public boolean link(Hover hover) {
+        if(hover == null || !valid(hover.coordinate().x, hover.coordinate().y))
+            return false;
+
         hover.map = this;
 
         hover.status = Mission.LANDED;
+
+        return true;
     }
 
     /**
      * Unlink a hover from the Map
      *
      * @param name A Hover Name
+     * @return if linked with success
      */
-    public void link(String name) {
-        link(engine.getHovers().get(name));
+    public boolean link(String name) {
+        return link(engine.getHovers().get(name));
     }
 
     /**
      * Unlink a hover from the Map
      *
      * @param hover A Hover
+     * @return if unlinked with success
      */
-    public void unlink(Hover hover) {
+    public boolean unlink(Hover hover) {
+        if(hover == null || !exists(hover))
+            return false;
+
         hover.coordinate().reset();
 
         hover.map = null;
 
         hover.status = Mission.ENDED;
+
+        return true;
+    }
+
+    /**
+     * Remove the Hover from the Map and reset it's position to the initial position
+     *
+     * @param name The Hover name
+     * @return if unlinked with success
+     */
+    public boolean unlink(String name) {
+        return unlink(engine.getHovers().get(name));
     }
 
     /**
@@ -133,15 +156,6 @@ public class Map {
      */
     public void unlink() {
         engine.getHovers().getByMap(this.name).forEach(h -> h.map.unlink(h));
-    }
-
-    /**
-     * Remove the Hover from the Map and reset it's position to the initial position
-     *
-     * @param name The Hover name
-     */
-    public void unlink(String name) {
-        unlink(engine.getHovers().get(name));
     }
 
     /**

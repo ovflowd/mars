@@ -1,6 +1,7 @@
 package nasa.mars.hover.model;
 
 import nasa.mars.hover.model.enumerator.Cardinal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class Coordinate extends Point implements Serializable {
     /**
      * The heading of the Hover in our Map
      */
-    public Cardinal heading = Cardinal.NORTH;
+    public Cardinal heading;
 
     /**
      * Get the Coordinate Dynamic String
@@ -32,6 +33,27 @@ public class Coordinate extends Point implements Serializable {
      */
     public String toString() {
         return "(" + this.x + ", " + this.y + ", " + heading.getCode() + ')';
+    }
+
+    /**
+     * Creates a new Coordinate
+     *
+     * @param x Desired X position
+     * @param y Desired Y position
+     * @param cardinal the Cardinal instance
+     */
+    public Coordinate(int x, int y, Cardinal cardinal) {
+        this.move(x, y);
+
+        this.heading = cardinal;
+    }
+
+    /**
+     * Creates a new Coordinate
+     */
+    @Autowired
+    public Coordinate() {
+        this.heading = Cardinal.NORTH;
     }
 
     /**

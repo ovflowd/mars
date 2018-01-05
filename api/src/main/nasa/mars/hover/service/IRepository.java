@@ -24,8 +24,9 @@ public interface IRepository<T> {
      * Remove an Object from the IRepository
      *
      * @param o Desired object to be removed
+     * @return if removed with success
      */
-    void remove(String o);
+    boolean remove(String o);
 
     /**
      * Build an Object and add it to the Repository
