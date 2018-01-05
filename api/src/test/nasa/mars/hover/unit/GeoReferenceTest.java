@@ -1,9 +1,13 @@
 package nasa.mars.hover.unit;
 
-import nasa.mars.hover.domain.Coordinate;
-import nasa.mars.hover.domain.GeoReference;
+import nasa.mars.hover.model.Coordinate;
+import nasa.mars.hover.model.enumerator.Cardinal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,39 +19,42 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author @sant0ro
  * @version 1.0
  */
+@RunWith(JUnitPlatform.class)
+@SpringBootTest()
 class GeoReferenceTest {
+
+    @Autowired
+    private Coordinate coordinate;
 
     @Test
     @DisplayName("Check if all characters return in their respective Coordinate Headings")
-    void testCoordinate() {
-        Coordinate c;
+    void testCardinal() {
+        coordinate.heading = Cardinal.NORTH;
 
-        c = new Coordinate(0, 0, GeoReference.NORTH);
+        assertEquals('N', coordinate.heading.getCode());
 
-        assertEquals('N', GeoReference.headingCode(c));
+        coordinate.heading = Cardinal.EAST;
 
-        c = new Coordinate(0, 0, GeoReference.EAST);
+        assertEquals('E', coordinate.heading.getCode());
 
-        assertEquals('E', GeoReference.headingCode(c));
+        coordinate.heading = Cardinal.WEST;
 
-        c = new Coordinate(0, 0, GeoReference.WEST);
+        assertEquals('W', coordinate.heading.getCode());
 
-        assertEquals('W', GeoReference.headingCode(c));
+        coordinate.heading = Cardinal.SOUTH;
 
-        c = new Coordinate(0, 0, GeoReference.SOUTH);
-
-        assertEquals('S', GeoReference.headingCode(c));
+        assertEquals('S', coordinate.heading.getCode());
     }
 
     @Test
     @DisplayName("Check the value of each Heading")
-    void testDegrees() {
-        assertEquals(90, GeoReference.NORTH);
+    void testAngles() {
+        assertEquals(90, Cardinal.NORTH.getAngle());
 
-        assertEquals(270, GeoReference.SOUTH);
+        assertEquals(270, Cardinal.SOUTH.getAngle());
 
-        assertEquals(0, GeoReference.EAST);
+        assertEquals(0, Cardinal.EAST.getAngle());
 
-        assertEquals(180, GeoReference.WEST);
+        assertEquals(180, Cardinal.WEST.getAngle());
     }
 }

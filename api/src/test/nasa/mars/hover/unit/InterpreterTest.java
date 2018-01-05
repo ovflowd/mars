@@ -1,10 +1,15 @@
 package nasa.mars.hover.unit;
 
-import nasa.mars.hover.domain.Coordinate;
-import nasa.mars.hover.domain.GeoReference;
-import nasa.mars.hover.util.Interpreter;
+import nasa.mars.hover.aspect.interpreter.MartianInterpreter;
+import nasa.mars.hover.model.Coordinate;
+import nasa.mars.hover.model.enumerator.Cardinal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -15,15 +20,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author @sant0ro
  * @version 1.0
  */
+@RunWith(JUnitPlatform.class)
+@SpringBootTest()
 class InterpreterTest {
+
+    @Autowired
+    private MartianInterpreter interpreter;
+
+    @Autowired
+    private Coordinate coordinate;
 
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
-        assertEquals(null, Interpreter.translate("MARLL"));
+        assertEquals(null, interpreter.translate("MARLL"));
 
-        assertEquals(new Coordinate(0, 2, GeoReference.NORTH).position.y, Interpreter.translate("MM").position.y);
+        assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 
-        assertEquals(new Coordinate(2, 2, GeoReference.EAST).heading, Interpreter.translate("MMRMM").heading);
+        assertEquals(coordinate.update(2, 2, Cardinal.EAST), interpreter.translate("MMRMM"));
     }
 }

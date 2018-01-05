@@ -1,9 +1,11 @@
-package nasa.mars.hover.domain;
+package nasa.mars.hover.model;
 
+import nasa.mars.hover.model.enumerator.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Hover Domain Entity
@@ -12,13 +14,23 @@ import java.io.Serializable;
  * @version 1.0
  * @author @sant0ro
  */
-@Configurable
+@Component
 public class Hover implements Serializable {
 
     /**
      * The Hover Name, because we want "Social" hovers, right?
      */
-    public final String name;
+    public String name;
+
+    /**
+     * When the Hover was Launched
+     */
+    public Date launch;
+
+    /**
+     * The Mission Status of the Hover
+     */
+    public Mission status;
 
     /**
      * The current Coordinate in the Map where the Hover belongs.
@@ -43,12 +55,25 @@ public class Hover implements Serializable {
     /**
      * Create a new Hover
      *
-     * @param name A name for the Hover
-     * @param map Initial Map
+     * @param name Hover Name
+     * @param launch Launch Date
+     * @param status Mission Status
      */
-    public Hover(String name, Map map) {
+    public Hover(String name, Date launch, Mission status) {
         this.name = name;
-        this.map = map;
+        this.launch = new Date();
+        this.status = Mission.STARTED;
+    }
+
+    /**
+     * Create a new Default Hover
+     */
+    @Autowired
+    public Hover(Coordinate c) {
+        this.name = "Default Hover";
+        this.launch = new Date();
+        this.status = Mission.STARTED;
+        this.coordinate = c;
     }
 
     /**

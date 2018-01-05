@@ -1,12 +1,11 @@
 package nasa.mars.hover.integration;
 
-import nasa.mars.hover.Boot;
 import nasa.mars.hover.controllers.Movement;
-import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -24,12 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MovementTest {
 
-    @Before
-    void setUp() {
-        new Boot();
-    }
-
-    private Movement movement = new Movement();
+    @Autowired
+    private Movement movement;
 
     @Test
     @DisplayName("Checking if the command 'MMRMMRMM' works")

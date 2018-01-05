@@ -1,27 +1,30 @@
-package nasa.mars.hover.util;
+package nasa.mars.hover.aspect.interpreter;
 
-import nasa.mars.hover.domain.Coordinate;
+import nasa.mars.hover.aspect.Interpreter;
+import nasa.mars.hover.model.Coordinate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Interpreter Utility
- * <p>
- * Validates and converts the Input Marcian Strin into a Coordinate
+ * Martian Interpreter
+ *
+ * Validates and converts the Martian Input String into a Coordinate
  *
  * @author @sant0ro
- * @version 1.0
+ * @version 1.1
+ * @since 1.0
  */
-@Component
-public class Interpreter implements Serializable {
+@Service
+public class MartianInterpreter implements Serializable, Interpreter {
 
     /**
      * Coordinate used for the Interpreter usage
      */
+    @Autowired
     private Coordinate coordinate;
 
     /**
@@ -29,8 +32,7 @@ public class Interpreter implements Serializable {
      *
      * @param coordinate Specified Coordinate
      */
-    @Autowired
-    public Interpreter(Coordinate coordinate) {
+    public MartianInterpreter(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -38,7 +40,7 @@ public class Interpreter implements Serializable {
      * Translate the Input String into a Coordinate
      *
      * @param hash input string
-     * @return desired Coordinate
+     * @return result Coordinate
      */
     public Coordinate translate(String hash) {
         List<Character> commands = hash.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
