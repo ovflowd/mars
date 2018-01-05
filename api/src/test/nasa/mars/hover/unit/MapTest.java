@@ -1,7 +1,6 @@
 package nasa.mars.hover.unit;
 
 import nasa.mars.hover.Boot;
-import nasa.mars.hover.Game;
 import nasa.mars.hover.domain.Map;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,7 @@ class MapTest {
 
     @Before
     void setUp() {
-        new Game();
+        new Boot();
     }
 
     @Test

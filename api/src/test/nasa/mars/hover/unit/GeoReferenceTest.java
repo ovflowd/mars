@@ -24,19 +24,19 @@ class GeoReferenceTest {
 
         c = new Coordinate(0, 0, GeoReference.NORTH);
 
-        assertEquals('N', GeoReference.getGeoReference(c));
+        assertEquals('N', GeoReference.headingCode(c));
 
         c = new Coordinate(0, 0, GeoReference.EAST);
 
-        assertEquals('E', GeoReference.getGeoReference(c));
+        assertEquals('E', GeoReference.headingCode(c));
 
         c = new Coordinate(0, 0, GeoReference.WEST);
 
-        assertEquals('W', GeoReference.getGeoReference(c));
+        assertEquals('W', GeoReference.headingCode(c));
 
         c = new Coordinate(0, 0, GeoReference.SOUTH);
 
-        assertEquals('S', GeoReference.getGeoReference(c));
+        assertEquals('S', GeoReference.headingCode(c));
     }
 
     @Test

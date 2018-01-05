@@ -1,6 +1,6 @@
 package nasa.mars.hover.integration;
 
-import nasa.mars.hover.Game;
+import nasa.mars.hover.Boot;
 import nasa.mars.hover.controllers.Movement;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +26,7 @@ class MovementTest {
 
     @Before
     void setUp() {
-        new Game();
+        new Boot();
     }
 
     private Movement movement = new Movement();

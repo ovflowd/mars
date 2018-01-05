@@ -1,5 +1,10 @@
 package nasa.mars.hover.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
 /**
  * GeoReference Enumerator
  *
@@ -7,29 +12,69 @@ package nasa.mars.hover.domain;
  * @version 1.0
  * @author @sant0ro
  */
-public class GeoReference {
+@Component
+public class GeoReference implements Serializable {
 
-    public final static int NORTH = 90; // 90 degrees
+    /**
+     * Cardinal Direction for
+     * the North direction as 90º degrees
+     */
+    public final static int NORTH = 90;
 
-    public final static int WEST = 180; // 180 degrees
+    /**
+     * Cardinal Direction for
+     * the West direction as 180 degrees
+     */
+    public final static int WEST = 180;
 
-    public final static int SOUTH = 270; // 270 degrees
+    /**
+     * Cardinal Direction for
+     * the South direction as 270 degrees
+     */
+    public final static int SOUTH = 270;
 
-    public final static int EAST = 0; // 0 or 360 degrees
+    /**
+     * Cardinal Direction for
+     * the East direction as 0/360º degrees
+     */
+    public final static int EAST = 0;
+
+    /**
+     * Coordinate relative to this GeoReference
+     */
+    private Coordinate coordinate;
+
+    /**
+     * Creates an Instance of the GeoReference
+     *
+     * @param coordinate The related Coordinate
+     */
+    @Autowired
+    GeoReference(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    /**
+     * This Autowired Constructor should not be called.
+     *
+     * @throws RuntimeException We cannot use this, since we inject dependencies
+     */
+    private GeoReference() throws RuntimeException {
+        throw new RuntimeException("This should not be called.");
+    }
 
     /**
      * Update the GeoReference from a Coordinate
      *
-     * @param c the related Coordinate object
      * @param command the following command
      */
-    public static void updateGeoReference(Coordinate c, char command) {
+    public void updateHeading(char command) {
         switch(command) {
             case 'L':
-                c.heading = (c.heading == 270 ? 0 : c.heading + 90);
+                coordinate.heading = (coordinate.heading == 270 ? 0 : coordinate.heading + 90);
                 break;
             case 'R':
-                c.heading = (c.heading == 0 ? 270 : c.heading - 90);
+                coordinate.heading = (coordinate.heading == 0 ? 270 : coordinate.heading - 90);
                 break;
             default:
                 break;
@@ -38,22 +83,20 @@ public class GeoReference {
 
     /**
      * Update the GeoReference Coordinates Position
-     *
-     * @param c the related Coordinate object
      */
-    public static void updateGeoPosition(Coordinate c) {
-        switch(c.heading) {
+    public void updatePosition() {
+        switch(coordinate.heading) {
             case NORTH:
-                c.position.y++;
+                coordinate.position.y++;
                 break;
             case EAST:
-                c.position.x++;
+                coordinate.position.x++;
                 break;
             case SOUTH:
-                c.position.y--;
+                coordinate.position.y--;
                 break;
             case WEST:
-                c.position.x--;
+                coordinate.position.x--;
                 break;
         }
     }
@@ -61,11 +104,10 @@ public class GeoReference {
     /**
      * Get the Geo Reference Code of a specific heading
      *
-     * @param c the related Coordinate object
      * @return the geo heading code
      */
-    public static char getGeoReference(Coordinate c) {
-        switch(c.heading) {
+    public char headingCode() {
+        switch(coordinate.heading) {
             default:
             case NORTH:
                 return 'N';

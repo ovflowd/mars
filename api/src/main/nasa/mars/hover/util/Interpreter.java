@@ -1,8 +1,10 @@
 package nasa.mars.hover.util;
 
 import nasa.mars.hover.domain.Coordinate;
-import nasa.mars.hover.domain.GeoReference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,23 @@ import java.util.stream.Collectors;
  * @author @sant0ro
  * @version 1.0
  */
-public class Interpreter {
+@Component
+public class Interpreter implements Serializable {
+
+    /**
+     * Coordinate used for the Interpreter usage
+     */
+    private Coordinate coordinate;
+
+    /**
+     * Creates a new Interpreter Instance
+     *
+     * @param coordinate Specified Coordinate
+     */
+    @Autowired
+    public Interpreter(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
 
     /**
      * Translate the Input String into a Coordinate
@@ -22,25 +40,23 @@ public class Interpreter {
      * @param hash input string
      * @return desired Coordinate
      */
-    public static Coordinate translate(String hash) {
+    public Coordinate translate(String hash) {
         List<Character> commands = hash.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
 
         if (!commands.stream().allMatch(Character::isLetter))
-            return null;
+            throw new RuntimeException("Invalid Command String Specified");
 
         if (!commands.stream().allMatch(c -> (c == 'L' || c == 'R' || c == 'M')))
-            return null;
-
-        Coordinate coordinate = new Coordinate(0, 0, GeoReference.NORTH);
+            throw new RuntimeException("Only L, R and M are valid commands");
 
         commands.forEach(command -> {
             switch (command) {
                 case 'R':
                 case 'L':
-                    GeoReference.updateGeoReference(coordinate, command);
+                    coordinate.reference.updateHeading(command);
                     break;
                 case 'M':
-                    GeoReference.updateGeoPosition(coordinate);
+                    coordinate.reference.updatePosition();
                     break;
             }
         });

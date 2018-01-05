@@ -2,8 +2,11 @@ package nasa.mars.hover.util;
 
 import nasa.mars.hover.domain.Coordinate;
 import nasa.mars.hover.domain.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * PathFinder Utility
@@ -19,20 +22,22 @@ import java.awt.*;
  * @version 1.0
  * @author @sant0ro
  */
-public class PathFinder {
+@Component
+public class PathFinder implements Serializable {
 
     /**
      * The Map instance designated to this PathFinder
      */
-    private final Map belongsTo;
+    private final Map map;
 
     /**
      * Creates a New PathFinder Instance
      *
      * @param map the map that the PathFinder belongs
      */
+    @Autowired
     public PathFinder(Map map) {
-        this.belongsTo = map;
+        this.map = map;
     }
 
     /**
@@ -42,7 +47,7 @@ public class PathFinder {
      * @return if is valid or not
      */
     public boolean checkPath(Point p) {
-        return p.x >= 0 && p.y >= 0 && p.x < belongsTo.xBounds && p.y < belongsTo.yBounds && belongsTo.getHover(p) == null;
+        return p.x >= 0 && p.y >= 0 && p.x < map.xBounds && p.y < map.yBounds && map.getHover(p) == null;
     }
 
     /**
@@ -53,6 +58,6 @@ public class PathFinder {
      * @return if is valid or not
      */
     public boolean checkPath(int x, int y) {
-        return this.checkPath(new Point(x, y));
+        return checkPath(new Point(x, y));
     }
 }

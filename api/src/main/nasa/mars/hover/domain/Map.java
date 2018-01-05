@@ -2,9 +2,12 @@ package nasa.mars.hover.domain;
 
 import nasa.mars.hover.Boot;
 import nasa.mars.hover.util.PathFinder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
 
 /**
  * Map Class
@@ -23,7 +26,8 @@ import java.util.ArrayList;
  * @version 1.0
  * @author @sant0ro
  */
-public class Map {
+@Configurable
+public class Map implements Serializable {
 
     /**
      * Map size in terms of X coordinate
@@ -47,7 +51,14 @@ public class Map {
      * Each PathFinder it's associated to a Map, to calculate
      *  the own Map Paths.
      */
-    private PathFinder pathFinder;
+    @Autowired
+    private final PathFinder pathFinder;
+
+    /**
+     * Our Application Engine
+     */
+    @Autowired
+    private Boot boot;
 
     /**
      * Creates a New Map
@@ -61,31 +72,40 @@ public class Map {
         this.xBounds = x;
         this.yBounds = y;
 
-        this.pathFinder = new PathFinder(this);
+        pathFinder = new PathFinder(this);
     }
 
     /**
-     * Get the Path Finder of the linked Map
+     * Creates a New Map
      *
-     * @return a PathFinder instance
+     * @param name the name of the Map
+     * @param x the length of the map
+     * @param y the width of the map
+     * @param pathFinder An injected PathFinder instance
      */
-    public PathFinder getPathFinder() {
-        return pathFinder;
+    public Map(String name, int x, int y, PathFinder pathFinder) {
+        this.name = name;
+        this.xBounds = x;
+        this.yBounds = y;
+
+        this.pathFinder = pathFinder;
     }
 
     /**
      * Update the Position of the Hover
      *
-     * @param temporary the desired Hover
+     * @param hover the desired Hover
      * @param c the desired Coordinate
+     *
+     * @return If the Path is valid and got successful update
      */
-    public boolean updateCoordinate(Hover temporary, Coordinate c) {
-        if(temporary == null || !this.pathFinder.checkPath(c.position))
+    public boolean updateCoordinate(Hover hover, Coordinate c) {
+        if(hover == null || !pathFinder.checkPath(c.position))
             return false;
 
-        temporary.setPosition(c.position);
+        hover.coordinate().position.move(c.position.x, c.position.y);
 
-        temporary.getCoordinate().heading = c.heading;
+        hover.coordinate().heading = c.heading;
 
         return true;
     }
@@ -97,40 +117,19 @@ public class Map {
      * @param c the desired Coordinate
      */
     public boolean updateCoordinate(String name, Coordinate c) {
-        return this.updateCoordinate(Boot.getGame().getHover(name), c);
-    }
-
-    /**
-     * Update the Position of the Hover
-     *
-     * @param id the Hover Identifier
-     * @param c the desired Coordinate
-     */
-    public boolean updateCoordinate(int id, Coordinate c) {
-        return this.updateCoordinate(Boot.getGame().getHover(id), c);
+        return updateCoordinate(boot.getHover(name), c);
     }
 
     /**
      * Add an Hover to the Map and set it Initial Position
      *
-     * @param temporary the desired Hover
+     * Note.: this automatically removes the link of the Hover
+     *  from the last map
+     *
+     * @param hover the desired Hover
      */
-    public void addHover(Hover temporary) {
-        if(temporary == null) {
-            System.out.println("Hover not found, cannot add it to the Map");
-
-            return;
-        }
-
-        if(temporary.getCurrentMap() != null) {
-            System.out.println("Hover already linked to a specific Map.");
-
-            return;
-        }
-
-        temporary.setPosition(0, 0);
-
-        temporary.setCurrentMap(this);
+    public void addHover(Hover hover) {
+        hover.map = this;
     }
 
     /**
@@ -139,30 +138,18 @@ public class Map {
      * @param name The Hover name
      */
     public void addHover(String name) {
-        this.addHover(Boot.getGame().getHover(name));
-    }
-
-    /**
-     * Add an Hover to the Map and set it Initial Position
-     *
-     * @param id The Hover Identifier
-     */
-    public void addHover(int id) {
-        this.addHover(Boot.getGame().getHover(id));
+        addHover(boot.getHover(name));
     }
 
     /**
      * Remove the Hover from the Map and erase it's position
      *
-     * @param h The current Hover
+     * @param hover The current Hover
      */
-    public void removeHover(Hover h) {
-        if(h == null)
-            return;
+    public void removeHover(Hover hover) {
+        hover.coordinate().reset();
 
-        h.setPosition(0, 0);
-
-        h.setCurrentMap((Map) null);
+        hover.map = null;
     }
 
     /**
@@ -171,49 +158,27 @@ public class Map {
      * @param name The Hover name
      */
     public void removeHover(String name) {
-        this.removeHover(Boot.getGame().getHover(name));
+        removeHover(boot.getHover(name));
     }
 
     /**
-     * Remove the Hover from the Map and reset it's position to the initial position
+     * Check if the specified Hover belongs to this ap
      *
-     * @param id The Hover Identifier
+     * @param h Specified Hover
+     * @return If belongs or not
      */
-    public void removeHover(int id) {
-        this.removeHover(Boot.getGame().getHover(id));
+    private boolean belongsTo(Hover h) {
+        return h != null && h.map.equals(this);
     }
 
     /**
-     * Get a Hover in this Map by the Hover name
-     *
-     * @param h The current Hover
-     * @return The desired Hover or null if it doesn't exists in this map.
-     */
-    private Hover getHover(Hover h) {
-        if(h == null || !h.getCurrentMap().name.equals(this.name))
-            return null;
-
-        return h;
-    }
-
-    /**
-     * Get a Hover in this Map by the Hover name
+     * Get a Hover in this Map
      *
      * @param name The Name of the Hover
      * @return The desired Hover or null if it doesn't exists in this map.
      */
     public Hover getHover(String name) {
-        return this.getHover(Boot.getGame().getHover(name));
-    }
-
-    /**
-     * Get a Hover in this Map by the Hover Identifier
-     *
-     * @param id The Identifier of the Hover
-     * @return The desired Hover or null if it doesn't exists in this map.
-     */
-    public Hover getHover(int id) {
-        return this.getHover(Boot.getGame().getHover(id));
+        return boot.getHovers(this).stream().filter(h -> h.name.equals(name)).findFirst().orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -224,12 +189,7 @@ public class Map {
      * @return The Hover instance if found, or null if not.
      */
     public Hover getHover(Point p) {
-        ArrayList<Hover> temporary = (ArrayList<Hover>) Boot.getGame().getHovers(this.name);
-
-        if(temporary.isEmpty())
-            return null;
-
-        return temporary.stream().filter(h -> h.getPosition() == p).findFirst().orElse(null);
+        return boot.getHovers(this).stream().filter(h -> h.coordinate().position.equals(p)).findFirst().orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -241,7 +201,7 @@ public class Map {
      * @return The Hover instance if found, or null if not.
      */
     public Hover getHover(int x, int y) {
-        return this.getHover(new Point(x, y));
+        return getHover(new Point(x, y));
     }
 
     /**
@@ -252,6 +212,6 @@ public class Map {
      * @return The Hover instance if found, or null if not.
      */
     public Hover getHover(Coordinate c) {
-        return this.getHover(c.position);
+        return getHover(c.position);
     }
 }
