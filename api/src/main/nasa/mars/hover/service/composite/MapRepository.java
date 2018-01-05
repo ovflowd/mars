@@ -37,13 +37,13 @@ public class MapRepository implements IRepository<Map> {
     /**
      * Add a new Map to the Repository
      *
+     * Note.: If element already exists,
+     *  it will be replaced.
+     *
      * @param map Map to be added
      */
     @Override
     public Map add(Map map) {
-        if(items.containsKey(map.name))
-            throw new RuntimeException("Map Repository already contains the desired Map");
-
         items.put(map.name, map);
 
         return map;

@@ -38,13 +38,13 @@ public class HoverRepository implements IRepository<Hover> {
     /**
      * Add a new Hover to the Repository
      *
+     * Note.: If element already exists,
+     *  it will be replaced.
+     *
      * @param hover Hover to be added
      */
     @Override
     public Hover add(Hover hover) {
-        if(items.containsKey(hover.name))
-            throw new RuntimeException("Hover Repository already contains the desired Hover");
-
         items.put(hover.name, hover);
 
         return hover;

@@ -73,8 +73,6 @@ public class MovementController {
             // Remove both Map and Hovers, in order to not store history
             engine.getMaps().remove("Mars");
 
-            engine.getHovers().remove("Curiosity");
-
             return ResponseEntity.ok().body(cString);
         } catch(RuntimeException e) {
             return ResponseEntity.badRequest().body("400 Bad Request");
