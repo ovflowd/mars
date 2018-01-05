@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Check if the Interpreter goes well
  *
  * @author @sant0ro
- * @version 1.0
+ * @version 1.1
+ * @since 1.0
  */
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -37,7 +38,7 @@ class InterpreterTest {
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
-        assertThrows(RuntimeException.class,  ()-> interpreter.translate("MARLL"));
+        assertThrows(RuntimeException.class, ()-> interpreter.translate("MARLL"));
 
         assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 

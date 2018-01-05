@@ -14,17 +14,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * GeoReferenceTest
+ * Command Test
  *
- * Unit Test for testing expected outputs from GeoReference Enumerator
+ * Unit Test fro the Command Iterator
  *
  * @author @sant0ro
- * @version 1.0
+ * @version 1.1
+ * @since 1.0
  */
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
-class GeoReferenceTest {
+class CommandTest {
 
     @Autowired
     private Coordinate coordinate;

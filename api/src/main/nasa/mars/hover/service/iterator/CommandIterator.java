@@ -2,34 +2,68 @@ package nasa.mars.hover.service.iterator;
 
 import nasa.mars.hover.model.Coordinate;
 import nasa.mars.hover.model.enumerator.Cardinal;
+import nasa.mars.hover.service.Iterator;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * GeoReference Iterator
+ * Command Iterator
  *
- * A Iterator Design Pattern, used to iterate through
- *  the Coordinate heading and Position and update their values
+ * A Iterator that works with given Interpreted Commands
+ *  and Iterate through they
  *
  * @author @sant0ro
  * @version 1.1
  * @since 1.0
  */
 @Service
-public class GeoReference implements Serializable {
+@Scope("prototype")
+public class CommandIterator implements Serializable, Iterator<List<Character>, Coordinate> {
 
     /**
-     * Coordinate relative to this GeoReference
+     * Coordinate Instance
      */
     private Coordinate coordinate;
+
+    /**
+     * Set the Predicated Manipulator
+     *
+     * @param coordinate Coordinate Instance
+     */
+    @Override
+    public void predicate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    /**
+     * Iterate through T object
+     *
+     * @param commands Command List
+     */
+    @Override
+    public void iterate(List<Character> commands) {
+        commands.forEach(command -> {
+            switch (command) {
+                case 'R':
+                case 'L':
+                    updateHeading(command);
+                    break;
+                case 'M':
+                    updatePosition();
+                    break;
+            }
+        });
+    }
 
     /**
      * Update the GeoReference from a Coordinate
      *
      * @param command the following command
      */
-    public void updateHeading(char command) {
+    private void updateHeading(char command) {
         switch(command) {
             case 'L':
                 coordinate.heading = (coordinate.heading == Cardinal.SOUTH ? Cardinal.EAST : Cardinal.valueOf(coordinate.heading.getAngle() + 90));
@@ -45,7 +79,7 @@ public class GeoReference implements Serializable {
     /**
      * Update the GeoReference Coordinates Position
      */
-    public void updatePosition() {
+    private void updatePosition() {
         switch(coordinate.heading) {
             case NORTH:
                 coordinate.y++;
@@ -60,17 +94,5 @@ public class GeoReference implements Serializable {
                 coordinate.x--;
                 break;
         }
-    }
-
-    /**
-     * Set the Coordinate for the GeoReference Service
-     *
-     * @param coordinate desired coordinate
-     * @return this instance (Fluent Setter)
-     */
-    public GeoReference setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-
-        return this;
     }
 }

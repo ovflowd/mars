@@ -2,6 +2,7 @@ package nasa.mars.hover.aspect.interpreter;
 
 import nasa.mars.hover.aspect.Interpreter;
 import nasa.mars.hover.model.Coordinate;
+import nasa.mars.hover.service.iterator.CommandIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,20 @@ public class MartianInterpreter implements Serializable, Interpreter {
     private Coordinate coordinate;
 
     /**
+     * Iterates through each Command
+     */
+    @Autowired
+    private CommandIterator iterator;
+
+    /**
      * Creates a new Interpreter Instance
      *
      * @param coordinate Specified Coordinate
+     * @param iterator Command Iterator
      */
-    public MartianInterpreter(Coordinate coordinate) {
+    public MartianInterpreter(Coordinate coordinate, CommandIterator iterator) {
         this.coordinate = coordinate;
+        this.iterator = iterator;
     }
 
     /**
@@ -55,17 +64,9 @@ public class MartianInterpreter implements Serializable, Interpreter {
 
         coordinate.reset();
 
-        commands.forEach(command -> {
-            switch (command) {
-                case 'R':
-                case 'L':
-                    coordinate.reference.updateHeading(command);
-                    break;
-                case 'M':
-                    coordinate.reference.updatePosition();
-                    break;
-            }
-        });
+        iterator.predicate(coordinate);
+
+        iterator.iterate(commands);
 
         return coordinate;
     }
