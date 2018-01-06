@@ -11,6 +11,5 @@ script:
   - ./gradlew check
   - ./gradlew build
 after_success:
-  - cd api/
   - codecov -t 7cb12456-21ad-43b5-b880-c6dec2f457cd
   
