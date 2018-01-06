@@ -1,6 +1,8 @@
 Thumbs.db
 .DS_Store
+.gradle/*
 .gradle
+api/.gradle
 build/
 out/
 lib/
