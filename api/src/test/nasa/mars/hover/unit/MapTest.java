@@ -5,6 +5,7 @@ import nasa.mars.hover.model.Coordinate;
 import nasa.mars.hover.model.Hover;
 import nasa.mars.hover.model.Map;
 import nasa.mars.hover.model.enumerator.Cardinal;
+import nasa.mars.hover.model.enumerator.Mission;
 import nasa.mars.hover.service.builder.EarthMapBuilder;
 import nasa.mars.hover.service.builder.MoonMapBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -102,6 +105,17 @@ class MapTest {
 
         // Test if really it's stored on teh repository
         assertNotNull(engine.getMaps().get("Moon"));
+
+        engine.getHovers().add(new Hover("Hello Darkness my Old friend", new Date(), Mission.FAILURE));
+
+        // Check if linking by Name works
+        engine.getMaps().get("Moon").link("Hello Darkness my Old friend");
+
+        // Tries to Unlink an non existent Hover, by Object
+        assertEquals(false, engine.getMaps().get("Moon").unlink((Hover) null));
+
+        // Tries to Unlink an non existent Hover, by Name
+        assertEquals(false, engine.getMaps().get("Moon").unlink("Lazy Hover"));
 
         // Test if removing goes well
         assertEquals(true, engine.getMaps().remove("Moon"));

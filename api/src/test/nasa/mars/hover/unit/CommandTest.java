@@ -35,30 +35,46 @@ class CommandTest {
     void testCardinal() {
         coordinate.heading = Cardinal.NORTH;
 
+        // Check if the Letter Code of North is correct
         assertEquals('N', coordinate.heading.getCode());
 
         coordinate.heading = Cardinal.EAST;
 
+        // Check if the Letter Code of East is correct
         assertEquals('E', coordinate.heading.getCode());
 
         coordinate.heading = Cardinal.WEST;
 
+        // Check if the Letter Code of West is correct
         assertEquals('W', coordinate.heading.getCode());
 
         coordinate.heading = Cardinal.SOUTH;
 
+        // Check if the Letter Code of South is correct
         assertEquals('S', coordinate.heading.getCode());
     }
 
     @Test
     @DisplayName("Check the value of each Heading")
     void testAngles() {
-        assertEquals(90, Cardinal.NORTH.getAngle());
+        coordinate.heading = Cardinal.NORTH;
 
-        assertEquals(270, Cardinal.SOUTH.getAngle());
+        // Check if the Angle in Degrees of North is correct
+        assertEquals(90, coordinate.heading.getAngle());
 
-        assertEquals(0, Cardinal.EAST.getAngle());
+        coordinate.heading = Cardinal.SOUTH;
 
-        assertEquals(180, Cardinal.WEST.getAngle());
+        // Check if the Angle in Degrees of South is correct
+        assertEquals(270, coordinate.heading.getAngle());
+
+        coordinate.heading = Cardinal.EAST;
+
+        // Check if the Angle in Degrees of East is correct
+        assertEquals(0, coordinate.heading.getAngle());
+
+        coordinate.heading = Cardinal.WEST;
+
+        // Check if the Angle in Degrees of West is correct
+        assertEquals(180, coordinate.heading.getAngle());
     }
 }
