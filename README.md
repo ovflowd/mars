@@ -17,7 +17,7 @@ Windows | Linux | Artifacts |
 This is a small REST micro service to simulate a **Hover** movement control in Mars. This project was made using the following technologies:
 
 * JEE 8
-* Spring Boot 1.5
+* Spring Boot 2.0
 * jUnit Jupiter
 * REST
 * TDD
