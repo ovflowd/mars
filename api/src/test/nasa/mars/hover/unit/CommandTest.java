@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Unit Test fro the Command Iterator
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @RunWith(JUnitPlatform.class)

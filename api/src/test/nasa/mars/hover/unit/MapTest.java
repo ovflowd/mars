@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Test Creating Maps and Manipulating It
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @RunWith(JUnitPlatform.class)

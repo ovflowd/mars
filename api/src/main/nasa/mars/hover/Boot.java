@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * we call this whole application as a Game Theory based application.
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @SpringBootApplication

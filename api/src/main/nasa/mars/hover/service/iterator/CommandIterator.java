@@ -1,8 +1,9 @@
 package nasa.mars.hover.service.iterator;
 
+import nasa.mars.hover.aspect.Command;
 import nasa.mars.hover.model.Coordinate;
-import nasa.mars.hover.model.enumerator.Cardinal;
 import nasa.mars.hover.service.Iterator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.List;
  *  and Iterate through they
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @Service
@@ -27,6 +28,22 @@ public class CommandIterator implements Serializable, Iterator<List<Character>, 
      * Coordinate Instance
      */
     private Coordinate coordinate;
+
+    /**
+     * All available Commands
+     *  loaded by Spring Context
+     */
+    public final List<Command> commands;
+
+    /**
+     * Creates a new Command Iterator
+     *
+     * @param commands All the available commands
+     */
+    @Autowired
+    public CommandIterator(List<Command> commands) {
+        this.commands = commands;
+    }
 
     /**
      * Set the Predicated Manipulator
@@ -45,54 +62,7 @@ public class CommandIterator implements Serializable, Iterator<List<Character>, 
      */
     @Override
     public void iterate(List<Character> commands) {
-        commands.forEach(command -> {
-            switch (command) {
-                case 'R':
-                case 'L':
-                    updateHeading(command);
-                    break;
-                case 'M':
-                    updatePosition();
-                    break;
-            }
-        });
-    }
-
-    /**
-     * Update the GeoReference from a Coordinate
-     *
-     * @param command the following command
-     */
-    private void updateHeading(char command) {
-        switch(command) {
-            case 'L':
-                coordinate.heading = (coordinate.heading == Cardinal.SOUTH ? Cardinal.EAST : Cardinal.valueOf(coordinate.heading.getAngle() + 90));
-                break;
-            case 'R':
-                coordinate.heading = (coordinate.heading == Cardinal.EAST ? Cardinal.SOUTH : Cardinal.valueOf(coordinate.heading.getAngle() - 90));
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Update the GeoReference Coordinates Position
-     */
-    private void updatePosition() {
-        switch(coordinate.heading) {
-            case NORTH:
-                coordinate.y++;
-                break;
-            case EAST:
-                coordinate.x++;
-                break;
-            case SOUTH:
-                coordinate.y--;
-                break;
-            case WEST:
-                coordinate.x--;
-                break;
-        }
+        commands.forEach(command -> this.commands.stream().filter(c -> c.code() == command).findFirst()
+                .orElseThrow(RuntimeException::new).coordinate(this.coordinate).execute());
     }
 }

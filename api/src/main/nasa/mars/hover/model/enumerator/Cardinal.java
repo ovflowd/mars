@@ -1,16 +1,20 @@
 package nasa.mars.hover.model.enumerator;
 
-import java.util.HashMap;
+import nasa.mars.hover.aspect.dictionary.AbstractCommand;
+import nasa.mars.hover.model.Coordinate;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
  * Cardinal Enumerator
  *
  * Used to store the Cardinal Positions of
- *  valid Headings
+ * valid Headings
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 public enum Cardinal {
@@ -19,58 +23,92 @@ public enum Cardinal {
      * Cardinal Direction for
      * the North direction as 90º degrees
      */
-    NORTH(90, 'N'),
+    NORTH(90, 'N', new AbstractCommand() {
+        @Override
+        public Coordinate execute() {
+            coordinate.y++;
+
+            return coordinate;
+        }
+    }),
 
     /**
      * Cardinal Direction for
      * the West direction as 180 degrees
      */
-    WEST(180, 'W'),
+    WEST(180, 'W', new AbstractCommand() {
+        @Override
+        public Coordinate execute() {
+            coordinate.x--;
+
+            return coordinate;
+        }
+    }),
 
     /**
      * Cardinal Direction for
      * the South direction as 270 degrees
      */
-    SOUTH(270, 'S'),
+    SOUTH(270, 'S', new AbstractCommand() {
+        @Override
+        public Coordinate execute() {
+            coordinate.y--;
+
+            return coordinate;
+        }
+    }),
 
     /**
      * Cardinal Direction for
      * the East direction as 0/360º degrees
      */
-    EAST(0, 'E');
+    EAST(0, 'E', new AbstractCommand() {
+        @Override
+        public Coordinate execute() {
+            coordinate.x++;
+
+            return coordinate;
+        }
+    });
 
     /**
      * Angle of the Cardinal Direction,
-     *  using the trigonometric circle
+     * using the trigonometric circle
      */
     private int angle;
 
     /**
      * Cardinal Letter Code, used for
-     *  output and convenience
+     * output and convenience
      */
     private char code;
 
     /**
+     * Coordinate Move Command
+     */
+    private AbstractCommand command;
+
+    /**
      * Static Map with all the elements of this Enumerator
      */
-    private static HashMap<Integer, Cardinal> map = new HashMap<>();
+    private static List<Cardinal> list;
 
     /**
      * Creates an Instance of the Cardinal Enumerator
      *
-     * @param angle Desired angle from 0 to 360
-     * @param code Letter Code
+     * @param angle   Desired angle from 0 to 360
+     * @param code    Letter Code
+     * @param command Coordinate Callback
      */
-     Cardinal(int angle, char code) {
+    Cardinal(int angle, char code, AbstractCommand command) {
         this.angle = angle;
         this.code = code;
+        this.command = command;
+
     }
 
     static {
-        for (Cardinal c : Cardinal.values()) {
-            map.put(c.angle, c);
-        }
+        list = Arrays.asList(Cardinal.values());
     }
 
     /**
@@ -79,7 +117,7 @@ public enum Cardinal {
      * @return Associated angle
      */
     public int getAngle() {
-         return angle;
+        return angle;
     }
 
     /**
@@ -88,7 +126,7 @@ public enum Cardinal {
      * @return Associated Cardinal Letter
      */
     public char getCode() {
-         return code;
+        return code;
     }
 
     /**
@@ -97,10 +135,29 @@ public enum Cardinal {
      * @param angle A specific angle (divisible by 90)
      * @return The specified Cardinal if exists, if not just null
      */
-    public static Cardinal valueOf(int angle) {
-        if(angle % 90 != 0)
+    public static Cardinal byAngle(int angle) {
+        if (angle % 90 != 0)
             throw new NoSuchElementException("Invalid provided Angle, must be divisible by 90º");
 
-        return map.get(angle);
+        return list.stream().filter(c -> c.angle == angle).findFirst().orElse(null);
+    }
+
+    /**
+     * Get a Cardinal based in a given Letter Code
+     *
+     * @param code A specific angle (divisible by 90)
+     * @return The specified Cardinal if exists, if not just null
+     */
+    public static Cardinal byCode(char code) {
+        return list.stream().filter(c -> c.code == code).findFirst().orElse(null);
+    }
+
+    /**
+     * Get the Move Command Instance
+     *
+     * @return the Command Instance
+     */
+    public AbstractCommand getCommand() {
+        return command;
     }
 }

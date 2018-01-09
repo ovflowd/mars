@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * Note.: A Hover can only be assigned to a single Map
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @Component

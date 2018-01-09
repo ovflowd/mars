@@ -14,7 +14,7 @@ import java.io.Serializable;
  * This is a Coordinate on our Map
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @Component
@@ -29,7 +29,7 @@ public class Coordinate extends Point implements Serializable {
     /**
      * Get the Coordinate Dynamic String
      *
-     * @return dynamic coordinate string
+     * @return dynamic point string
      */
     public String toString() {
         return "(" + this.x + ", " + this.y + ", " + heading.getCode() + ')';

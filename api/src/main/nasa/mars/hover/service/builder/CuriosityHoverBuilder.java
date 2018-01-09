@@ -13,7 +13,7 @@ import java.util.Date;
  * Used to build Earth Map
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 @Service

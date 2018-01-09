@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Validates and converts the Martian Input String into a Coordinate
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @Service
@@ -59,8 +59,8 @@ public class MartianInterpreter implements Serializable, Interpreter {
         if (!commands.stream().allMatch(Character::isLetter))
             throw new RuntimeException("Invalid Command String Specified");
 
-        if (!commands.stream().allMatch(c -> (c == 'L' || c == 'R' || c == 'M')))
-            throw new RuntimeException("Only L, R and M are valid commands");
+        if (!commands.stream().allMatch(c -> this.iterator.commands.stream().anyMatch(x -> x.code() == c)))
+            throw new RuntimeException("One of the Command isn't a valid Command");
 
         coordinate.reset();
 

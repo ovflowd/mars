@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * Used to build Moon Map
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 @Service

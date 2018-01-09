@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  *  the Mars hovers
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @RestController

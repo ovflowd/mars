@@ -14,7 +14,7 @@ import java.util.Date;
  * This "memory based" entity would contain our Hover entities
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @Component

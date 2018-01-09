@@ -7,7 +7,7 @@ package nasa.mars.hover.aspect;
  *  to design simple interpreting methods
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 public interface Interpreter {

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Check if the Interpreter goes well
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 @RunWith(JUnitPlatform.class)
@@ -38,22 +38,22 @@ class InterpreterTest {
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
-        // Should throw an exception, invalid command code inside the command
+        // Should throw an exception, invalid dictionary code inside the dictionary
         assertThrows(RuntimeException.class, ()-> interpreter.translate("MARLL"));
 
-        // Testing command -> move, move
+        // Testing dictionary -> move, move
         assertEquals(coordinate.update(0, 2, Cardinal.NORTH), interpreter.translate("MM"));
 
-        // Testing command -> move, move, right, move, move
+        // Testing dictionary -> move, move, right, move, move
         assertEquals(coordinate.update(2, 2, Cardinal.EAST), interpreter.translate("MMRMM"));
 
-        // Testing command -> move, move, right, left, move
+        // Testing dictionary -> move, move, right, left, move
         assertEquals(coordinate.update(0, 3, Cardinal.NORTH), interpreter.translate("MMRLM"));
 
-        // Testing command -> left, left, left, left, right, right, right, right
+        // Testing dictionary -> left, left, left, left, right, right, right, right
         assertEquals(coordinate.update(0, 0, Cardinal.NORTH), interpreter.translate("LLLLRRRR"));
 
-        // Testing command -> right, move, left, left, move
+        // Testing dictionary -> right, move, left, left, move
         assertEquals(coordinate.update(0, 0, Cardinal.NORTH), interpreter.translate("RMLLM"));
     }
 }

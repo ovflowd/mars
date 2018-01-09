@@ -6,7 +6,7 @@ package nasa.mars.hover.model.enumerator;
  * Used for the Mission Status of the Hover
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 public enum Mission {

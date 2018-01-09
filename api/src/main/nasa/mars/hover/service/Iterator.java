@@ -6,7 +6,7 @@ package nasa.mars.hover.service;
  * Used to Iterate through Objects
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 public interface Iterator<T, R> {

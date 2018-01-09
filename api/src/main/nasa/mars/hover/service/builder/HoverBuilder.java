@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Used to build specific Maps
  *
  * @author @sant0ro
- * @version 1.1
+ * @version 1.2
  * @since 1.1
  */
 public abstract class HoverBuilder implements IBuilder<Hover> {
