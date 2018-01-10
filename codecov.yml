@@ -1,0 +1,5 @@
+ignore:
+  - "api/src/main/nasa/mars/hover/Boot.java"
+  - "api/src/main/nasa/mars/hover/Boot.*"
+  - "src/main/nasa/mars/hover/Boot.java"
+  - "main/nasa/mars/hover/Boot.java"
