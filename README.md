@@ -4,7 +4,7 @@
 
 ----------------------
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]() [![Github All Releases](https://img.shields.io/github/downloads/ovflowd/mars/total.svg)]() [![GitHub release](https://img.shields.io/github/release/ovflowd/mars.svg)]() 
-[![GitHub issues](https://img.shields.io/github/issues/ovflowd/mars.svg)]() [![codecov](https://codecov.io/gh/ovflowd/mars/branch/master/graph/badge.svg)](https://codecov.io/gh/ovflowd/mars) [![Docker Pulls](https://img.shields.io/docker/pulls/ovflowd/mars.svg)]()
+[![GitHub issues](https://img.shields.io/github/issues/ovflowd/mars.svg)]() [![codecov](https://codecov.io/gh/ovflowd/mars/branch/master/graph/badge.svg)](https://codecov.io/gh/ovflowd/mars) [![Docker Pulls](https://img.shields.io/docker/pulls/sant0ro/mars.svg)]()
 
 #### Build Status
 
