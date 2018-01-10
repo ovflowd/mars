@@ -10,7 +10,7 @@
 
 Windows | Linux | Artifacts |
 --------|--------------|-----------|
-[![Build status](https://ci.appveyor.com/api/projects/status/0w89cdu2wsi8ay0s?svg=true)](https://ci.appveyor.com/project/ovflowd/mars) | [![Build Status](https://travis-ci.org/ovflowd/mars.svg?branch=master)](https://travis-ci.org/ovflowd/mars) | [Artifacts](https://github.com/ovflowd/mars/releases) |
+[![Build status](https://ci.appveyor.com/api/projects/status/0w89cdu2wsi8ay0s?svg=true)](https://ci.appveyor.com/project/sant0ro/mars) | [![Build Status](https://travis-ci.org/ovflowd/mars.svg?branch=master)](https://travis-ci.org/ovflowd/mars) | [Artifacts](https://github.com/ovflowd/mars/releases) |
 
 ## About
 
