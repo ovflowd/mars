@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Scope("prototype")
-public class MartianInterpreter implements Serializable, Interpreter {
+public class MartianInterpreter implements Interpreter {
 
     /**
      * Coordinate used for the Interpreter usage

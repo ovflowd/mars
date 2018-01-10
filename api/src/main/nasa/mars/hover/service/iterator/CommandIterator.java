@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @Service
 @Scope("prototype")
-public class CommandIterator implements Serializable, Iterator<List<Character>, Coordinate> {
+public class CommandIterator implements Iterator<List<Character>, Coordinate> {
 
     /**
      * Coordinate Instance

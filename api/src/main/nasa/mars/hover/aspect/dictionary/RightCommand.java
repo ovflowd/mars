@@ -2,6 +2,7 @@ package nasa.mars.hover.aspect.dictionary;
 
 import nasa.mars.hover.model.Coordinate;
 import nasa.mars.hover.model.enumerator.Cardinal;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  * @see Coordinate
  */
 @Component
+@Qualifier("prototype")
 public class RightCommand extends AbstractCommand<Cardinal> {
 
     /**

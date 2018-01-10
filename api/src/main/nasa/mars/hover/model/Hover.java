@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +18,7 @@ import java.util.Date;
  */
 @Component
 @Scope("prototype")
-public class Hover implements Serializable {
+public class Hover {
 
     /**
      * The Hover Name, because we want "Social" hovers, right?

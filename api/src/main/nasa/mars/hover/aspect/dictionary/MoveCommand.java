@@ -17,6 +17,7 @@ import java.awt.*;
  * @see Coordinate
  */
 @Component
+@Qualifier("prototype")
 public class MoveCommand extends AbstractCommand<Point> {
 
     /**
@@ -26,7 +27,10 @@ public class MoveCommand extends AbstractCommand<Point> {
      */
     @Override
     public Point execute() {
-        coordinate.setLocation(((Coordinate) coordinate.heading.getCommand().execute()).getLocation());
+        Coordinate temporary = (Coordinate) coordinate.heading.getCommand().execute();
+
+        coordinate.x += temporary.x;
+        coordinate.y += temporary.y;
 
         return coordinate.getLocation();
     }

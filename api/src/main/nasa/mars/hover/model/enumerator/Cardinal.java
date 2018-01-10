@@ -26,7 +26,7 @@ public enum Cardinal {
     NORTH(90, 'N', new AbstractCommand() {
         @Override
         public Coordinate execute() {
-            coordinate.y++;
+            coordinate.move(0, 1);
 
             return coordinate;
         }
@@ -39,7 +39,7 @@ public enum Cardinal {
     WEST(180, 'W', new AbstractCommand() {
         @Override
         public Coordinate execute() {
-            coordinate.x--;
+            coordinate.move(-1, 0);
 
             return coordinate;
         }
@@ -52,7 +52,7 @@ public enum Cardinal {
     SOUTH(270, 'S', new AbstractCommand() {
         @Override
         public Coordinate execute() {
-            coordinate.y--;
+            coordinate.move(0, -1);
 
             return coordinate;
         }
@@ -65,7 +65,7 @@ public enum Cardinal {
     EAST(0, 'E', new AbstractCommand() {
         @Override
         public Coordinate execute() {
-            coordinate.x++;
+            coordinate.move(1, 0);
 
             return coordinate;
         }
@@ -140,16 +140,6 @@ public enum Cardinal {
             throw new NoSuchElementException("Invalid provided Angle, must be divisible by 90º");
 
         return list.stream().filter(c -> c.angle == angle).findFirst().orElse(null);
-    }
-
-    /**
-     * Get a Cardinal based in a given Letter Code
-     *
-     * @param code A specific angle (divisible by 90)
-     * @return The specified Cardinal if exists, if not just null
-     */
-    public static Cardinal byCode(char code) {
-        return list.stream().filter(c -> c.code == code).findFirst().orElse(null);
     }
 
     /**

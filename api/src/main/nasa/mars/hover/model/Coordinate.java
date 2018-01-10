@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
-import java.io.Serializable;
 
 /**
  * Hover Coordinate Utility
@@ -19,7 +18,7 @@ import java.io.Serializable;
  */
 @Component
 @Scope("prototype")
-public class Coordinate extends Point implements Serializable {
+public class Coordinate extends Point {
 
     /**
      * The heading of the Hover in our Map
@@ -53,6 +52,8 @@ public class Coordinate extends Point implements Serializable {
      */
     @Autowired
     public Coordinate() {
+        this.move(0, 0);
+
         this.heading = Cardinal.NORTH;
     }
 
