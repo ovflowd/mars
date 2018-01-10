@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Map Builder
- *
+ * <p>
  * Used to build specific Maps
  *
  * @author @sant0ro
@@ -42,7 +42,7 @@ public abstract class MapBuilder implements IBuilder<Map> {
      * @return Map Instance
      */
     @Override
-    public Map build(){
+    public Map build() {
         buildName();
         buildHeight();
         buildWidth();

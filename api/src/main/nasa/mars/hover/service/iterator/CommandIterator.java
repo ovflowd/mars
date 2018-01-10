@@ -11,9 +11,9 @@ import java.util.List;
 
 /**
  * Command Iterator
- *
+ * <p>
  * A Iterator that works with given Interpreted Commands
- *  and Iterate through they
+ * and Iterate through they
  *
  * @author @sant0ro
  * @version 1.2
@@ -24,15 +24,14 @@ import java.util.List;
 public class CommandIterator implements Iterator<List<Character>, Coordinate> {
 
     /**
+     * All available Commands
+     * loaded by Spring Context
+     */
+    public final List<Command> commands;
+    /**
      * Coordinate Instance
      */
     private Coordinate coordinate;
-
-    /**
-     * All available Commands
-     *  loaded by Spring Context
-     */
-    public final List<Command> commands;
 
     /**
      * Creates a new Command Iterator

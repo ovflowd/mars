@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * IRepository
- *
+ * <p>
  * Used to store specific kind of Models
  *
  * @author @sant0ro
@@ -40,7 +40,6 @@ public interface IRepository<T> {
      * Tries to get an Object from the Repository
      *
      * @param o A name of the Object
-     *
      * @return The Object if found, null otherwise
      */
     T get(String o);

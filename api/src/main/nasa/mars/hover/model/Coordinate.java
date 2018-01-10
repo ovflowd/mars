@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * Hover Coordinate Utility
- *
+ * <p>
  * This is a Coordinate on our Map
  *
  * @author @sant0ro
@@ -26,19 +26,10 @@ public class Coordinate extends Point {
     public Cardinal heading;
 
     /**
-     * Get the Coordinate Dynamic String
-     *
-     * @return dynamic point string
-     */
-    public String toString() {
-        return "(" + this.x + ", " + this.y + ", " + heading.getCode() + ')';
-    }
-
-    /**
      * Creates a new Coordinate
      *
-     * @param x Desired X position
-     * @param y Desired Y position
+     * @param x        Desired X position
+     * @param y        Desired Y position
      * @param cardinal the Cardinal instance
      */
     public Coordinate(int x, int y, Cardinal cardinal) {
@@ -58,11 +49,20 @@ public class Coordinate extends Point {
     }
 
     /**
+     * Get the Coordinate Dynamic String
+     *
+     * @return dynamic point string
+     */
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ", " + heading.getCode() + ')';
+    }
+
+    /**
      * Reset the Coordinate Attributes
-     *  to their default value
+     * to their default value
      */
     public void reset() {
-        this.move(0,0);
+        this.move(0, 0);
 
         this.heading = Cardinal.NORTH;
     }
@@ -70,8 +70,8 @@ public class Coordinate extends Point {
     /**
      * Update the Coordinate data and return it
      *
-     * @param x The new X position
-     * @param y The new Y position
+     * @param x        The new X position
+     * @param y        The new Y position
      * @param cardinal The Cardinal Heading
      * @return This instane
      */

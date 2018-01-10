@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Boot
- *
+ * <p>
  * Since this application it's a test scenario, non NASA official application,
  * we call this whole application as a Game Theory based application.
  *
@@ -20,9 +20,9 @@ public class Boot {
 
     /**
      * Called by Spring Boot
-     *
+     * <p>
      * Creates Spring Boot environment and creates
-     *  itself as an Singleton
+     * itself as an Singleton
      *
      * @param args Unused on this application
      */

@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Cardinal Enumerator
- *
+ * <p>
  * Used to store the Cardinal Positions of
  * valid Headings
  *
@@ -72,33 +72,35 @@ public enum Cardinal {
     });
 
     /**
+     * Static Map with all the elements of this Enumerator
+     */
+    private static List<Cardinal> list;
+
+    static {
+        list = Arrays.asList(Cardinal.values());
+    }
+
+    /**
      * Angle of the Cardinal Direction,
      * using the trigonometric circle
      */
     private int angle;
-
     /**
      * Cardinal Letter Code, used for
      * output and convenience
      */
     private char code;
-
     /**
      * Coordinate Move Command
      */
     private AbstractCommand command;
 
     /**
-     * Static Map with all the elements of this Enumerator
-     */
-    private static List<Cardinal> list;
-
-    /**
      * Creates an Instance of the Cardinal Enumerator
      *
      * @param angle   Desired angle from 0 to 360
      * @param code    Letter Code
-     * @param command Coordinate Callback
+     * @param command Command Callable
      */
     Cardinal(int angle, char code, AbstractCommand command) {
         this.angle = angle;
@@ -107,8 +109,17 @@ public enum Cardinal {
 
     }
 
-    static {
-        list = Arrays.asList(Cardinal.values());
+    /**
+     * Get a Cardinal based in a given Angle
+     *
+     * @param angle A specific angle (divisible by 90)
+     * @return The specified Cardinal if exists, if not just null
+     */
+    public static Cardinal byAngle(int angle) {
+        if (angle % 90 != 0)
+            throw new NoSuchElementException("Invalid provided Angle, must be divisible by 90º");
+
+        return list.stream().filter(c -> c.angle == angle).findFirst().orElse(null);
     }
 
     /**
@@ -127,19 +138,6 @@ public enum Cardinal {
      */
     public char getCode() {
         return code;
-    }
-
-    /**
-     * Get a Cardinal based in a given Angle
-     *
-     * @param angle A specific angle (divisible by 90)
-     * @return The specified Cardinal if exists, if not just null
-     */
-    public static Cardinal byAngle(int angle) {
-        if (angle % 90 != 0)
-            throw new NoSuchElementException("Invalid provided Angle, must be divisible by 90º");
-
-        return list.stream().filter(c -> c.angle == angle).findFirst().orElse(null);
     }
 
     /**

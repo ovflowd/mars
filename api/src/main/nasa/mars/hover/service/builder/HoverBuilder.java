@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Hover Builder
- *
+ * <p>
  * Used to build specific Maps
  *
  * @author @sant0ro
@@ -42,7 +42,7 @@ public abstract class HoverBuilder implements IBuilder<Hover> {
      * @return Hover Instance
      */
     @Override
-    public Hover build(){
+    public Hover build() {
         buildName();
         buildLaunchDate();
         buildMissionStatus();

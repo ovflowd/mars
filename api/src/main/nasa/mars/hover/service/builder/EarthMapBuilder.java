@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Earth Map Builder
- *
+ * <p>
  * Used to build Earth Map
  *
  * @author @sant0ro

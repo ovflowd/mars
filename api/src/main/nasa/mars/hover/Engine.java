@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Engine Facade
- *
+ * <p>
  * The Engine behind the Application
  *
  * @author @sant0ro
@@ -32,7 +32,7 @@ public class Engine {
     /**
      * Creates a new Instance of the Engine Facade
      *
-     * @param maps The Map Repository
+     * @param maps   The Map Repository
      * @param hovers The Hover Repository
      */
     public Engine(MapRepository maps, HoverRepository hovers) {

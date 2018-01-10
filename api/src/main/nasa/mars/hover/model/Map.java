@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 /**
  * Map Class
- *
+ * <p>
  * Used as 2D Map Definition
- *
+ * <p>
  * Notes.: this is an 2D Game Map, emulating a 3D User Vector,
- *  where the Vector itself contains (X, Y, Heading).
- *
+ * where the Vector itself contains (X, Y, Heading).
+ * <p>
  * Notes.: In this scenario we will create a real world scenario,
- *  based for network usage, and multiple hovers, even, if the API
- *  would only handle an unique hover.
- *
+ * based for network usage, and multiple hovers, even, if the API
+ * would only handle an unique hover.
+ * <p>
  * Note.: A Hover can only be assigned to a single Map
  *
  * @author @sant0ro
@@ -65,12 +65,11 @@ public class Map {
      * Update the Position of the Hover
      *
      * @param hover the desired Hover
-     * @param c the desired Coordinate
-     *
+     * @param c     the desired Coordinate
      * @return If the Path is valid and got successful update
      */
     public boolean move(Hover hover, Coordinate c) {
-        if(hover == null || !valid(c.x, c.y))
+        if (hover == null || !valid(c.x, c.y))
             return false;
 
         hover.coordinate().move(c.x, c.y);
@@ -86,7 +85,7 @@ public class Map {
      * Update the Position of the Hover
      *
      * @param name the Hover name
-     * @param c the desired Coordinate
+     * @param c    the desired Coordinate
      */
     public boolean move(String name, Coordinate c) {
         return move(engine.getHovers().get(name), c);
@@ -94,15 +93,15 @@ public class Map {
 
     /**
      * Add an Hover to the Map and set it Initial Position
-     *
+     * <p>
      * Note.: this automatically removes the link of the Hover
-     *  from the last map
+     * from the last map
      *
      * @param hover the desired Hover
      * @return if linked with success
      */
     public boolean link(Hover hover) {
-        if(hover == null || !valid(hover.coordinate().x, hover.coordinate().y))
+        if (hover == null || !valid(hover.coordinate().x, hover.coordinate().y))
             return false;
 
         hover.map = this;
@@ -129,7 +128,7 @@ public class Map {
      * @return if unlinked with success
      */
     public boolean unlink(Hover hover) {
-        if(hover == null || !exists(hover))
+        if (hover == null || !exists(hover))
             return false;
 
         hover.coordinate().reset();
@@ -170,7 +169,7 @@ public class Map {
 
     /**
      * Get a Hover by a Point, also useful to check if exists a Hover in a
-     *  specific Point.
+     * specific Point.
      *
      * @param x the X position
      * @param y the Y position

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Movement Controller
- *
+ * <p>
  * Does the Movement operations of
- *  the Mars hovers
+ * the hovers
  *
  * @author @sant0ro
  * @version 1.2
@@ -74,7 +74,7 @@ public class MovementController {
             map.link(curiosity);
 
             // Check if is valid and update Coordinate
-            if(!map.move(curiosity, c))
+            if (!map.move(curiosity, c))
                 return ResponseEntity.badRequest().body("400 Bad Request");
 
             // Get Coordinate String
@@ -84,7 +84,7 @@ public class MovementController {
             engine.getMaps().remove("Mars");
 
             return ResponseEntity.ok().body(cString);
-        } catch(RuntimeException e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("400 Bad Request");
         }
     }

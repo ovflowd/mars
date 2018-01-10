@@ -5,13 +5,14 @@ import nasa.mars.hover.model.Coordinate;
 
 /**
  * Abstract Command
- *
- * An Abstract Command
+ * <p>
+ * An Abstract Command that executes
+ * iterations with a Coordinate
  *
  * @author @sant0ro
  * @version 1.2
- * @since 1.2
  * @see nasa.mars.hover.model.Coordinate
+ * @since 1.2
  */
 public abstract class AbstractCommand<T> implements Command<T> {
 

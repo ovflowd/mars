@@ -6,13 +6,14 @@ import org.springframework.stereotype.Component;
 
 /**
  * Left Command
- *
- * Change Heading to Left Command
+ * <p>
+ * Change the Heading of a Coordinate to one level to
+ * left, since each Heading has 90º of difference.
  *
  * @author @sant0ro
  * @version 1.2
- * @since 1.2
  * @see nasa.mars.hover.model.Coordinate
+ * @since 1.2
  */
 @Component
 @Qualifier("prototype")
@@ -25,7 +26,8 @@ public class LeftCommand extends AbstractCommand<Cardinal> {
      */
     @Override
     public Cardinal execute() {
-        return coordinate.heading = (coordinate.heading == Cardinal.SOUTH ? Cardinal.EAST : Cardinal.byAngle(coordinate.heading.getAngle() + 90));
+        return coordinate.heading = (coordinate.heading == Cardinal.SOUTH ? Cardinal.EAST :
+                Cardinal.byAngle(coordinate.heading.getAngle() + 90));
     }
 
     /**

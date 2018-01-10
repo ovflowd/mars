@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * Martian Interpreter
- *
+ * <p>
  * Validates and converts the Martian Input String into a Coordinate
  *
  * @author @sant0ro
@@ -39,7 +39,7 @@ public class MartianInterpreter implements Interpreter {
      * Creates a new Interpreter Instance
      *
      * @param coordinate Specified Coordinate
-     * @param iterator Command Iterator
+     * @param iterator   Command Iterator
      */
     public MartianInterpreter(Coordinate coordinate, CommandIterator iterator) {
         this.coordinate = coordinate;

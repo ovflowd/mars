@@ -8,13 +8,14 @@ import java.awt.*;
 
 /**
  * Move Command
- *
- * Move Position Command
+ * <p>
+ * Translates the Position of a Coordinate
+ * upon a new one based on the result of a Command
  *
  * @author @sant0ro
  * @version 1.2
- * @since 1.2
  * @see Coordinate
+ * @since 1.2
  */
 @Component
 @Qualifier("prototype")
@@ -29,8 +30,7 @@ public class MoveCommand extends AbstractCommand<Point> {
     public Point execute() {
         Coordinate temporary = (Coordinate) coordinate.heading.getCommand().execute();
 
-        coordinate.x += temporary.x;
-        coordinate.y += temporary.y;
+        coordinate.translate(temporary.x, temporary.y);
 
         return coordinate.getLocation();
     }

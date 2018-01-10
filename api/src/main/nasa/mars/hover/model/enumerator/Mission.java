@@ -2,7 +2,7 @@ package nasa.mars.hover.model.enumerator;
 
 /**
  * Mission Status Enumerator
- *
+ * <p>
  * Used for the Mission Status of the Hover
  *
  * @author @sant0ro

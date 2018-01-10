@@ -2,9 +2,9 @@ package nasa.mars.hover.aspect;
 
 /**
  * Interpreter Interface
- *
+ * <p>
  * Using the Interpreter Design Pattern,
- *  to design simple interpreting methods
+ * to design simple interpreting methods
  *
  * @author @sant0ro
  * @version 1.2
@@ -14,7 +14,7 @@ public interface Interpreter {
 
     /**
      * Translate Method
-     *
+     * <p>
      * Interpreters a given Input into a valid result
      *
      * @param a The input string

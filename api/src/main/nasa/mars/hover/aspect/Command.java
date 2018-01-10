@@ -3,20 +3,21 @@ package nasa.mars.hover.aspect;
 import nasa.mars.hover.model.Coordinate;
 
 /**
- * Martian Command Dictionary
- *
+ * Martian Command Interface
+ * <p>
  * Specifies a Martian Command
+ * execution and design
  *
  * @author @sant0ro
  * @version 1.2
+ * @see Coordinate
  * @since 1.2
- * @see java.awt.Point
  */
 public interface Command<T> {
 
     /**
      * Execute the Command
-     *  and what it specifies
+     * and what it specifies
      */
     T execute();
 
@@ -29,10 +30,9 @@ public interface Command<T> {
 
     /**
      * Fluent Setter to set the related
-     *  Coordinate and return the Command
+     * Coordinate and return the Command
      *
      * @param coordinate the related Coordinate
-     *
      * @return self
      */
     Command coordinate(Coordinate coordinate);

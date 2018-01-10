@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * Hover Domain Entity
- *
+ * <p>
  * This "memory based" entity would contain our Hover entities
  *
  * @author @sant0ro
@@ -34,17 +34,15 @@ public class Hover {
      * The Mission Status of the Hover
      */
     public Mission status;
-
+    /**
+     * The Current Map that the Hoer it's placed
+     */
+    public Map map;
     /**
      * The current Coordinate in the Map where the Hover belongs.
      */
     @Autowired
     private Coordinate coordinate;
-
-    /**
-     * The Current Map that the Hoer it's placed
-     */
-    public Map map;
 
     /**
      * Create a new Hover
@@ -60,7 +58,7 @@ public class Hover {
     /**
      * Create a new Hover
      *
-     * @param name Hover Name
+     * @param name   Hover Name
      * @param launch Launch Date
      * @param status Mission Status
      */
