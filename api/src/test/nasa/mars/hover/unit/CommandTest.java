@@ -1,5 +1,8 @@
 package nasa.mars.hover.unit;
 
+import nasa.mars.hover.aspect.dictionary.LeftCommand;
+import nasa.mars.hover.aspect.dictionary.MoveCommand;
+import nasa.mars.hover.aspect.dictionary.RightCommand;
 import nasa.mars.hover.model.Coordinate;
 import nasa.mars.hover.model.enumerator.Cardinal;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -76,5 +81,55 @@ class CommandTest {
 
         // Check if the Angle in Degrees of West is correct
         assertEquals(180, coordinate.heading.getAngle());
+    }
+
+    @Test
+    @DisplayName("Check if the Right Command works Well")
+    void testRightCommand() {
+        coordinate.heading = Cardinal.NORTH;
+
+        // Test if the Command reduces -90 in the Heading. (Now be 0, EAST)
+        assertEquals(Cardinal.EAST, (new RightCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command reduces -90 in the Heading. (Now be 270, SOUTH)
+        assertEquals(Cardinal.SOUTH, (new RightCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command reduces -90 in the Heading. (Now be 180, WEST)
+        assertEquals(Cardinal.WEST, (new RightCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command reduces -90 in the Heading. (Now be 90, NORTH)
+        assertEquals(Cardinal.NORTH, (new RightCommand()).coordinate(coordinate).execute());
+    }
+
+    @Test
+    @DisplayName("Check if the Left Command works Well")
+    void testLeftCommand() {
+        coordinate.heading = Cardinal.NORTH;
+
+        // Test if the Command increases +90 in the Heading. (Now be 180, WEST)
+        assertEquals(Cardinal.WEST, (new LeftCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command increases +90 in the Heading. (Now be 270, SOUTH)
+        assertEquals(Cardinal.SOUTH, (new LeftCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command increases +90 in the Heading. (Now be 0, EAST)
+        assertEquals(Cardinal.EAST, (new LeftCommand()).coordinate(coordinate).execute());
+
+        // Test if the Command increases +90 in the Heading. (Now be 90, NORTH)
+        assertEquals(Cardinal.NORTH, (new LeftCommand()).coordinate(coordinate).execute());
+    }
+
+    @Test
+    @DisplayName("Check if the Move Command works Well")
+    void testMoveCommand() {
+        coordinate.update(0, 0, Cardinal.NORTH);
+
+        // Going to North, need be Y+1
+        assertEquals(new Point(0, 1), (new MoveCommand()).coordinate(coordinate).execute());
+
+        coordinate.heading = Cardinal.EAST;
+
+        // Going to East, need be X+1
+        assertEquals(new Point(1, 1), (new MoveCommand()).coordinate(coordinate).execute());
     }
 }
