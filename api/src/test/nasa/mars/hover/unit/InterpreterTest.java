@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Interpreter Test
  *
- * Check if the Interpreter goes well
+ * Unit Test to checks the behaviour
+ *  of the Command Interpreter
  *
  * @author @sant0ro
  * @version 1.2
@@ -38,7 +39,7 @@ class InterpreterTest {
     @Test
     @DisplayName("Check if Interpreter creates correct Coordinates")
     void testCoordinates() {
-        // Should throw an exception, invalid dictionary code inside the dictionary
+        // Should throw an exception, invalid command inside the command dictionary
         assertThrows(RuntimeException.class, ()-> interpreter.translate("MARLL"));
 
         // Testing dictionary -> move, move

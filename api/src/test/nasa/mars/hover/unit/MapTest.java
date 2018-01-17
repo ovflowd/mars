@@ -25,7 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Map Test
  *
- * Test Creating Maps and Manipulating It
+ * Unit Test and Functional Test for all behaviours that
+ *  the Map Component could do.
  *
  * @author @sant0ro
  * @version 1.2
@@ -48,31 +49,43 @@ class MapTest {
     @Test
     @DisplayName("Tries to create Maps and check the valid Paths")
     void testMapBounds() {
+        // Build a new Moon Map and add it to the Map Repository
         Map moonMap = engine.getMaps().build(moonMapBuilder);
 
+        // (33, 33) is an invalid point in the Map, because it's out of the Bounds
+        // That assertion should return false, because that point is invalid.
         assertEquals(false, moonMap.valid(33, 33));
 
+        // This is a valid Point, the bounds of a Moon Map are (2, 2)
         assertEquals(true, moonMap.valid(1, 1));
 
+        // We can't either have negative Points, that doesn't exists in a 2D Map
+        // Only exists in a 3D map, where the angle it's the Z angle.
         assertEquals(false, moonMap.valid(-20, 0));
 
+        // Build a new Earth Map and add it to the Map Repository
         Map earthMap = engine.getMaps().build(earthMapBuilder);
 
+        // This should return true, it's a valid Point, the Bounds are (3, 3);
         assertEquals(true, earthMap.valid(2, 2));
 
+        // This is an invalid Point in the Map, exceeds the Bounds.
         assertEquals(false, earthMap.valid(90, 3));
     }
 
     @Test
     @DisplayName("Add Hover to a Map and test with it")
     void testPathFinder() {
+        // Build a new Earth Map and add it to the Map Repository
         Map earthMap = engine.getMaps().build(earthMapBuilder);
 
+        // Add a new Hover called "Land Hover"
         Hover landHover = engine.getHovers().add(new Hover("Land Hover"));
 
+        // Add a new Hover called "SpaceX Hover" (Our Dream...(
         Hover spaceXHover = engine.getHovers().add(new Hover("SpaceX Hover"));
 
-        // First we land our Land Hover
+        // First we land our Land Hover to the Map
         earthMap.link(landHover);
 
         // Check if we can move the Hover on a valid place of the Map

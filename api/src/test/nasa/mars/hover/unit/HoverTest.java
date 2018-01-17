@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Hover Test
  *
- * Does tests with the Hovers
+ * Unit Test that realizes many assertions with
+ *  the Hover Entity
  *
  * @author @sant0ro
  * @version 1.2
@@ -44,19 +45,22 @@ class HoverTest {
         // Test if by default the Repository it's empty
         assertEquals(false, engine.getHovers().exists("Land Rover"));
 
-        // Test if added with success it on the repository
+        // Test if Building a Hover inside a repository, goes well.
         assertNotNull(engine.getHovers().build(curiosityHoverBuilder));
 
-        // Test if really it's stored on teh repository
+        // Test if the Built Hover it's really stored on the Repository
         assertNotNull(engine.getHovers().get("Curiosity"));
 
-        // Test if removing goes well
+        // Test if removing a Hover by the name, results in actually removing it.
         assertEquals(true, engine.getHovers().remove("Curiosity"));
 
-        // Check if creating manually Hovers, Coordinate goes well
+        // Check if creating a Hover manually without a Factory or a Builder works.
         assertNotNull(new Hover("Loyal Hover", new Date(), Mission.FAILURE).coordinate());
 
         // Clear everything.
         engine.getHovers().clear();
+
+        // Check if after clearing it, we don't have any element.
+        assertEquals(0, engine.getHovers().all().size());
     }
 }

@@ -21,7 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Command Test
  *
- * Unit Test fro the Command Iterator
+ * Unit Test for asserting multiple different scenarios
+ *  involving Commands, that includes Coordinates, Cardinals
+ *  and other Entities/Components.
  *
  * @author @sant0ro
  * @version 1.2
@@ -37,55 +39,64 @@ class CommandTest {
 
     @Test
     @DisplayName("Check if all characters return in their respective Coordinate Headings")
-    void testCardinal() {
+    void testLetters() {
+        // Setting the Heading to North
         coordinate.heading = Cardinal.NORTH;
 
-        // Check if the Letter Code of North is correct
+        // Checking if returning the North Cardinal, actually gives us the North Letter
         assertEquals('N', coordinate.heading.getCode());
 
+        // Setting the Heading to East
         coordinate.heading = Cardinal.EAST;
 
-        // Check if the Letter Code of East is correct
+        // Checking if returning the East Cardinal, actually gives us the East Letter
         assertEquals('E', coordinate.heading.getCode());
 
+        // Setting the Heading to West
         coordinate.heading = Cardinal.WEST;
 
-        // Check if the Letter Code of West is correct
+        // Checking if returning the West Cardinal, actually gives us the West Letter
         assertEquals('W', coordinate.heading.getCode());
 
+        // Setting the Heading to South
         coordinate.heading = Cardinal.SOUTH;
 
-        // Check if the Letter Code of South is correct
+        // Checking if returning the South Cardinal, actually gives us the South Letter
         assertEquals('S', coordinate.heading.getCode());
     }
 
     @Test
     @DisplayName("Check the value of each Heading")
     void testAngles() {
+        // Setting the Heading to North
         coordinate.heading = Cardinal.NORTH;
 
-        // Check if the Angle in Degrees of North is correct
+        // Checking if returning the North Cardinal, actually gives us the North Angle
         assertEquals(90, coordinate.heading.getAngle());
 
+        // Setting the Heading to South
         coordinate.heading = Cardinal.SOUTH;
 
-        // Check if the Angle in Degrees of South is correct
+        // Checking if returning the South Cardinal, actually gives us the South Angle
         assertEquals(270, coordinate.heading.getAngle());
 
+        // Setting the Heading to East
         coordinate.heading = Cardinal.EAST;
 
-        // Check if the Angle in Degrees of East is correct
+        // Checking if returning the East Cardinal, actually gives us the East Angle
         assertEquals(0, coordinate.heading.getAngle());
 
+        // Setting the Heading to West
         coordinate.heading = Cardinal.WEST;
 
-        // Check if the Angle in Degrees of West is correct
+        // Checking if returning the West Cardinal, actually gives us the West Angle
         assertEquals(180, coordinate.heading.getAngle());
     }
 
     @Test
     @DisplayName("Check if the Right Command works Well")
     void testRightCommand() {
+        // Setting the Heading to North (Resetting)
         coordinate.heading = Cardinal.NORTH;
 
         // Test if the Command reduces -90 in the Heading. (Now be 0, EAST)
@@ -104,6 +115,7 @@ class CommandTest {
     @Test
     @DisplayName("Check if the Left Command works Well")
     void testLeftCommand() {
+        // Setting the Heading to North (Resetting)
         coordinate.heading = Cardinal.NORTH;
 
         // Test if the Command increases +90 in the Heading. (Now be 180, WEST)
@@ -122,11 +134,13 @@ class CommandTest {
     @Test
     @DisplayName("Check if the Move Command works Well")
     void testMoveCommand() {
+        // Changing the Position to the Initial Map Position
         coordinate.update(0, 0, Cardinal.NORTH);
 
         // Going to North, need be Y+1
         assertEquals(new Point(0, 1), (new MoveCommand()).coordinate(coordinate).execute());
 
+        // Just randomly updating the Heading to East
         coordinate.heading = Cardinal.EAST;
 
         // Going to East, need be X+1
